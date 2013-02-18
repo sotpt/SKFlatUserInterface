@@ -81,7 +81,7 @@
 //        CGSize labelSize = [labelText sizeWithFont:label.font
 //                                 constrainedToSize:labelFrame.size
 //                                     lineBreakMode:label.lineBreakMode];
-    if (self.highlighted)
+    if (self.highlighted || self.selected)
     {
         [label.highlightedTextColor set];
     }
@@ -137,7 +137,7 @@
             }
             CGContextSaveGState(context);
 
-            if (self.highlighted)
+            if (self.highlighted || self.selected)
             {
                 [label.highlightedTextColor set];
             }
@@ -162,7 +162,7 @@
             CGContextAddPath(context, clippingPath);
             
             UIColor *borderColor;
-            if (self.highlighted)
+			if (self.highlighted || self.selected)
             {
                 borderColor = label.highlightedBorderColor;
             }
@@ -176,7 +176,7 @@
         }
         else
         {
-            if (self.highlighted)
+			if (self.highlighted || self.selected)
             {
                 [label.highlightedTextColor set];
             }
@@ -335,11 +335,7 @@
 - (UIColor *)currentBackgroundColor
 {
     UIColor *backgroundColor;
-    if (self.highlighted)
-    {
-        backgroundColor = self.highlightedBackgroundColor;
-    }
-    else if (self.selected)
+	if (self.highlighted || self.selected)
     {
         backgroundColor = self.highlightedBackgroundColor;
     }

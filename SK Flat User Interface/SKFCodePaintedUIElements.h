@@ -38,5 +38,6 @@
 + (UIImage *)navigationBarImageForBarMetrics:(UIBarMetrics)barMetrics;
 + (UIImage *)pinImage;
 + (UIImage *)buttonImageWithColor:(UIColor *)color borderColor:(UIColor *)borderColor;
++ (UIImage *)sandwichButtonImageForBarMetrics:(UIBarMetrics)barMetrics;
 
 @end

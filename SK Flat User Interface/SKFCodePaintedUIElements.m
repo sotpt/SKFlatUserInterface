@@ -248,5 +248,52 @@ static BFCodePaintedUIElementsImageCache *defaultImageCache;
     return [image resizableImageWithCapInsets:UIEdgeInsetsMake(22.0f, 22.0f, 22.0f, 22.0f)];
 }
 
++ (UIImage *)sandwichButtonImageForBarMetrics:(UIBarMetrics)barMetrics
+{
+	if (barMetrics == UIBarMetricsLandscapePhone)
+	{
+		UIGraphicsBeginImageContextWithOptions(CGSizeMake(25.0f, 17.0f), NO, 0.0f);
+
+	}
+	else
+	{
+		UIGraphicsBeginImageContextWithOptions(CGSizeMake(25.0f, 19.0f), NO, 0.0f);
+	}
+
+	CGFloat cornerRadius = 2;
+	[[SKFUserInterface almostWhiteColor] setFill];
+	
+	//// firstLine Drawing
+	UIBezierPath* firstLinePath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, 25, 4)
+															 cornerRadius:cornerRadius];
+	[firstLinePath fill];
+	
+	
+	//// secondLine Drawing
+	CGFloat secondLineOriginY = 7;
+	if (barMetrics == UIBarMetricsLandscapePhone)
+	{
+	secondLineOriginY = 6;
+	}
+	UIBezierPath* secondLinePath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, secondLineOriginY, 25, 4)
+															  cornerRadius:cornerRadius];
+	[secondLinePath fill];
+	
+	//// thirdLine Drawing
+	CGFloat thirdLineOriginY = 14;
+	if (barMetrics == UIBarMetricsLandscapePhone)
+	{
+		thirdLineOriginY = 12;
+	}
+	UIBezierPath* thirdLinePath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, thirdLineOriginY, 25, 4)
+															 cornerRadius:cornerRadius];
+	[thirdLinePath fill];
+	
+	//create image
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
 
 @end
