@@ -188,7 +188,7 @@ static BFCodePaintedUIElementsImageCache *defaultImageCache;
 {
     if (nil == [BFCodePaintedUIElementsImageCache defaultImageCache].pinImage)
     {
-        UIGraphicsBeginImageContextWithOptions(CGSizeMake(42.0f, 42.0f), NO, 0.0f);
+        UIGraphicsBeginImageContextWithOptions(CGSizeMake(28.0f, 42.0f), NO, 0.0f);
 
         //// Oval 4 Drawing
         UIBezierPath* pinPath = [UIBezierPath bezierPath];

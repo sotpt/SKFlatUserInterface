@@ -218,7 +218,21 @@
 {
     CGRect imageViewFrame = [self convertRect:imageView.frame fromView:self.contentView];
     imageViewFrame = CGRectMoveY(imageViewFrame, -0.5);
-  
+	
+	if (imageView.contentMode == UIViewContentModeCenter)
+	{
+		imageViewFrame.origin.x += (imageViewFrame.size.width -imageView.image.size.width) / 2.0f;
+		imageViewFrame.origin.y += (imageViewFrame.size.height -imageView.image.size.height) / 2.0f;
+	}
+	
+	if (imageView.contentMode != UIViewContentModeScaleToFill)
+	{
+		imageViewFrame.size.width = imageView.image.size.width;
+		imageViewFrame.size.height = imageView.image.size.height;
+	}
+	
+
+	
     if (! [imageView.backgroundColor isEqual:[UIColor clearColor]])
     {
         [imageView.backgroundColor set];
