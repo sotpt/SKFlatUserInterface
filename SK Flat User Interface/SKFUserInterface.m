@@ -66,6 +66,8 @@ static SKFUserInterface *defaultSKFUserInterface;
 	[SKFUserInterface defaultSKFUserInterface].roundedCornerRadius = roundedCornerRadius;
 
     [self configureNavigationBar];
+	[self configureToolbar];
+
     [self configureBarButtonItems];
 	[self configureSearchBar];
 }
@@ -84,6 +86,25 @@ static SKFUserInterface *defaultSKFUserInterface;
                          UITextAttributeTextShadowColor : [UIColor clearColor],
                                UITextAttributeTextColor : [self almostWhiteColor]
      }];
+    
+    //  [[UINavigationBar appearance] setTintColor:[self mainColor]];
+}
+
+
++ (void)configureToolbar
+{
+    [[UIToolbar appearance] setBackgroundImage:[SKFCodePaintedUIElements navigationBarImageForBarMetrics:UIBarMetricsDefault]
+							forToolbarPosition:UIToolbarPositionAny barMetrics:UIBarMetricsDefault];
+    
+    [[UIToolbar appearance] setBackgroundImage:[SKFCodePaintedUIElements navigationBarImageForBarMetrics:UIBarMetricsLandscapePhone]
+                                       forToolbarPosition:UIToolbarPositionAny barMetrics:UIBarMetricsLandscapePhone];
+    
+//    [[UIToolbar appearance] setTitleTextAttributes:
+//     @{
+//                                    UITextAttributeFont : [self defaultFontWithSize:17.0f],
+//                         UITextAttributeTextShadowColor : [UIColor clearColor],
+//                               UITextAttributeTextColor : [self almostWhiteColor]
+//     }];
     
     //  [[UINavigationBar appearance] setTintColor:[self mainColor]];
 }
@@ -223,6 +244,21 @@ static SKFUserInterface *defaultSKFUserInterface;
                          alpha:darkerMainColorHSBA[3]];
 }
 
+
++ (UIColor *)color:(UIColor *)color withSaturation:(CGFloat)saturation
+{
+    CGFloat colorHSBA[4];
+    [color getHue:&colorHSBA[0]
+                 saturation:&colorHSBA[1]
+                 brightness:&colorHSBA[2]
+                      alpha:&colorHSBA[3]];
+    
+    return [UIColor colorWithHue:colorHSBA[0]
+					  saturation:colorHSBA[1]*saturation
+					  brightness:colorHSBA[2]
+						   alpha:colorHSBA[3]];
+}
+
 + (UIColor *)textColor
 {
     return [UIColor colorWithHue:0.0f saturation:0.0f brightness:0.2f alpha:1.0f];
@@ -268,6 +304,10 @@ static SKFUserInterface *defaultSKFUserInterface;
     return [UIFont fontWithName:[SKFUserInterface defaultSKFUserInterface].fontName size:textField.font.pointSize];
 }
 
++ (UIFont *)defaultFontForTextView:(UITextView *)textView
+{
+    return [UIFont fontWithName:[SKFUserInterface defaultSKFUserInterface].fontName size:textView.font.pointSize];
+}
 
 #pragma mark - rounded corners
 
@@ -284,6 +324,60 @@ static SKFUserInterface *defaultSKFUserInterface;
     view.layer.borderWidth = 1.0f;
     view.layer.shouldRasterize = YES;
     view.layer.rasterizationScale = [UIScreen mainScreen].scale;
+}
+
+
+#pragma mark - buttons
+
++ (void)styleButton:(UIButton *)button forStyle:(SKFUserInterfaceButtonStyle)style
+{
+	if (style == SKFUserInterfaceButtonStyleMainColor)
+	{
+		[button setBackgroundImage:[SKFCodePaintedUIElements buttonImageWithColor:[SKFUserInterface mainColor]
+															borderColor:[SKFUserInterface darkerMainColor]]
+				forState:UIControlStateNormal];
+		
+		[button setBackgroundImage:[SKFCodePaintedUIElements buttonImageWithColor:[SKFUserInterface darkerMainColor]
+															borderColor:[SKFUserInterface textColor]]
+				forState:UIControlStateHighlighted];
+		
+		[button setTitleColor:[SKFUserInterface almostWhiteColor] forState:UIControlStateNormal];
+		button.titleLabel.font = [SKFUserInterface defaultFontForLabel:button.titleLabel];
+		button.backgroundColor = [UIColor clearColor];
+	}
+	
+	if (style == SKFUserInterfaceButtonStyleAlmostWhiteColor)
+		{
+		[button setBackgroundImage:[SKFCodePaintedUIElements buttonImageWithColor:[SKFUserInterface almostWhiteColor]
+															borderColor:[SKFUserInterface darkerGrayColor]]
+				forState:UIControlStateNormal];
+		
+		[button setBackgroundImage:[SKFCodePaintedUIElements buttonImageWithColor:[SKFUserInterface textColor]
+															borderColor:[SKFUserInterface darkerTextColor]]
+				forState:UIControlStateHighlighted];
+		
+		[button setTitleColor:[SKFUserInterface darkerGrayColor] forState:UIControlStateNormal];
+		[button setTitleColor:[SKFUserInterface almostWhiteColor] forState:UIControlStateHighlighted];
+
+		button.titleLabel.font = [SKFUserInterface defaultFontForLabel:button.titleLabel];
+		button.backgroundColor = [UIColor clearColor];
+		}
+
+	if (style == SKFUserInterfaceButtonStyleTextColor)
+	{
+		[button setBackgroundImage:[SKFCodePaintedUIElements buttonImageWithColor:[SKFUserInterface textColor]
+															borderColor:[SKFUserInterface darkerTextColor]]
+				forState:UIControlStateNormal];
+		
+		[button setBackgroundImage:[SKFCodePaintedUIElements buttonImageWithColor:[SKFUserInterface mainColor]
+															borderColor:[SKFUserInterface darkerMainColor]]
+				forState:UIControlStateHighlighted];
+		
+		[button setTitleColor:[SKFUserInterface almostWhiteColor] forState:UIControlStateNormal];
+		button.titleLabel.font = [SKFUserInterface defaultFontForLabel:button.titleLabel];
+		button.backgroundColor = [UIColor clearColor];
+		}
+	
 }
 
 @end

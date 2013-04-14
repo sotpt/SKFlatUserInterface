@@ -30,6 +30,13 @@
 #import <QuartzCore/QuartzCore.h>
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSUInteger, SKFUserInterfaceButtonStyle)
+{
+	SKFUserInterfaceButtonStyleMainColor,
+	SKFUserInterfaceButtonStyleAlmostWhiteColor,
+	SKFUserInterfaceButtonStyleTextColor
+};
+
 @interface SKFUserInterface : NSObject
 
 + (void)configureUserInterfaceWithMainColor:(UIColor *)mainColor
@@ -46,11 +53,16 @@
 + (UIColor *)almostWhiteColor;
 + (UIColor *)darkerTextColor;
 
++ (UIColor *)color:(UIColor *)color withSaturation:(CGFloat)saturation;
+
 + (UIFont *)defaultFontWithSize:(CGFloat)size;
 + (UIFont *)defaultFontForLabel:(UILabel *)label;
 + (UIFont *)defaultFontForTextField:(UITextField *)textField;
++ (UIFont *)defaultFontForTextView:(UITextView *)textView;
 
 + (CGFloat)roundedCornerRadius;
 + (void)addRoundedCornersToView:(UIView *)view withColor:(UIColor *)color;
+
++ (void)styleButton:(UIButton *)button forStyle:(SKFUserInterfaceButtonStyle)style;
 
 @end

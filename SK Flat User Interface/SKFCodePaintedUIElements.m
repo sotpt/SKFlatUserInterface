@@ -229,23 +229,24 @@ static BFCodePaintedUIElementsImageCache *defaultImageCache;
 
 + (UIImage *)buttonImageWithColor:(UIColor *)color borderColor:(UIColor *)borderColor
 {
-    UIGraphicsBeginImageContextWithOptions(CGSizeMake(44.0f, 44.0f), NO, 0.0f);
+	UIGraphicsBeginImageContextWithOptions(CGSizeMake(44.0f, 44.0f), NO, 0.0f);
 
-    UIBezierPath* path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, 44.0f, 44.0f) cornerRadius:[SKFUserInterface roundedCornerRadius]];
-    
-    path.lineWidth = 2;
-    
+	//// Rounded Rectangle Drawing
+	UIBezierPath* roundedRectanglePath = [UIBezierPath bezierPathWithRoundedRect: CGRectMake(0.5, 0.5, 43, 43) cornerRadius: 4];
+	
     [color setFill];
+    [roundedRectanglePath fill];
+	
     [borderColor setStroke];
-    
-    [path fill];
-    [path stroke];
+	roundedRectanglePath.lineWidth = 1;
+    [roundedRectanglePath stroke];
+	
     
     //create image
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-    
-    return [image resizableImageWithCapInsets:UIEdgeInsetsMake(22.0f, 22.0f, 22.0f, 22.0f)];
+
+    return [image resizableImageWithCapInsets:UIEdgeInsetsMake(12.0f, 12.0f, 12.0f, 12.0f)];
 }
 
 + (UIImage *)sandwichButtonImageForBarMetrics:(UIBarMetrics)barMetrics
@@ -295,5 +296,6 @@ static BFCodePaintedUIElementsImageCache *defaultImageCache;
     
     return image;
 }
+
 
 @end

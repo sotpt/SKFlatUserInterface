@@ -15,5 +15,9 @@ BOOL (^isNilOrNull)(id obj) = ^BOOL (id obj)
 BOOL (^isNilNullOrEmpty)(id obj) = ^BOOL (NSString *obj)
 {
     
-    return (nil == obj || [obj isEqual:[NSNull null]] || obj.length == 0);
+    return (nil == obj ||
+			[obj isEqual:[NSNull null]] ||
+			obj.length == 0 ||
+			[obj isEqualToString:@"<null>"]
+			);
 };
