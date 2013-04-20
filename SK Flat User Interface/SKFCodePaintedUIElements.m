@@ -226,6 +226,28 @@ static BFCodePaintedUIElementsImageCache *defaultImageCache;
     return  [BFCodePaintedUIElementsImageCache defaultImageCache].pinImage;
 }
 
++ (UIImage *)searchBarImageWithColor:(UIColor *)color borderColor:(UIColor *)borderColor
+{
+	UIGraphicsBeginImageContextWithOptions(CGSizeMake(44.0f, 44.0f), NO, 0.0f);
+    CGFloat verticalInsets = 7.0f;
+    
+	//// Rounded Rectangle Drawing
+	UIBezierPath* roundedRectanglePath = [UIBezierPath bezierPathWithRoundedRect: CGRectMake(0.5, 0.5 + verticalInsets, 43, 43 - 2 * verticalInsets) cornerRadius: 4];
+	
+    [color setFill];
+    [roundedRectanglePath fill];
+	
+    [borderColor setStroke];
+	roundedRectanglePath.lineWidth = 1;
+    [roundedRectanglePath stroke];
+	
+    
+    //create image
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return [image resizableImageWithCapInsets:UIEdgeInsetsMake(12.0f, 12.0f, 12.0f, 12.0f)];
+}
 
 + (UIImage *)buttonImageWithColor:(UIColor *)color borderColor:(UIColor *)borderColor
 {

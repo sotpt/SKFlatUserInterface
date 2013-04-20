@@ -144,14 +144,19 @@ static SKFUserInterface *defaultSKFUserInterface;
                                UITextAttributeTextColor : [self almostWhiteColor]
      }
                                                 forState:UIControlStateHighlighted];
+    
+    [[UIBarButtonItem appearance] setTitlePositionAdjustment:UIOffsetMake(0.0f, 2.0f) forBarMetrics:UIBarMetricsDefault];
 }
 
 + (void)configureSearchBar
 {
 	[[UISearchBar appearance] setBackgroundImage:[SKFCodePaintedUIElements navigationBarImageForBarMetrics:UIBarMetricsDefault]];
     
-//    [[UISearchBar appearance] setBackgroundImage:[SKFCodePaintedUIElements navigationBarImageForBarMetrics:UIBarMetricsLandscapePhone] forBarMetrics:UIBarMetricsLandscapePhone];
-
+    UITextField *textField = [UITextField appearanceWhenContainedIn:[UISearchBar class], nil];
+    textField.textColor = [SKFUserInterface almostWhiteColor];
+    textField.font = [SKFUserInterface defaultFontWithSize:12.0f];
+    textField.background = nil;
+    
 }
 
 
@@ -380,4 +385,25 @@ static SKFUserInterface *defaultSKFUserInterface;
 	
 }
 
+
++ (void)styleSearchBar:(UISearchBar *)searchBar
+{
+    UIImage *image = [SKFCodePaintedUIElements searchBarImageWithColor:[SKFUserInterface almostWhiteColor] borderColor:[SKFUserInterface darkerMainColor]];
+    image = [[[UIImage alloc] init] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+//    [searchBar setSearchFieldBackgroundImage:image
+//                                    forState:UIControlStateNormal];
+//    
+//    [searchBar setScopeBarButtonTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[self normalFontWithSize:11.0f],UITextAttributeFont,
+//                                                     [UIColor whiteColor],UITextAttributeTextColor,nil]
+//                                           forState:UIControlStateNormal];
+    
+//    [searchBar setImage:[UIImage imageNamed:@"od_tabview_searchbar_magnifier"]
+//       forSearchBarIcon:UISearchBarIconSearch
+//                  state:UIControlStateNormal];
+//    
+//    [searchBar setImage:[UIImage imageNamed:@"od_search_navbar_clear_button"]
+//       forSearchBarIcon:UISearchBarIconClear
+//                  state:UIControlStateNormal];
+    
+}
 @end

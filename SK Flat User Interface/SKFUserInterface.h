@@ -65,4 +65,5 @@ typedef NS_ENUM(NSUInteger, SKFUserInterfaceButtonStyle)
 
 + (void)styleButton:(UIButton *)button forStyle:(SKFUserInterfaceButtonStyle)style;
 
++ (void)styleSearchBar:(UISearchBar *)searchBar;
 @end

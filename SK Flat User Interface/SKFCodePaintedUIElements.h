@@ -39,5 +39,5 @@
 + (UIImage *)pinImage;
 + (UIImage *)buttonImageWithColor:(UIColor *)color borderColor:(UIColor *)borderColor;
 + (UIImage *)sandwichButtonImageForBarMetrics:(UIBarMetrics)barMetrics;
-
++ (UIImage *)searchBarImageWithColor:(UIColor *)color borderColor:(UIColor *)borderColor;
 @end
