@@ -150,7 +150,7 @@ static SKFUserInterface *defaultSKFUserInterface;
 {
 	[[UISearchBar appearance] setBackgroundImage:[SKFCodePaintedUIElements navigationBarImageForBarMetrics:UIBarMetricsDefault]];
     
-    [[UISearchBar appearance] setBackgroundImage:[SKFCodePaintedUIElements navigationBarImageForBarMetrics:UIBarMetricsLandscapePhone]];
+//    [[UISearchBar appearance] setBackgroundImage:[SKFCodePaintedUIElements navigationBarImageForBarMetrics:UIBarMetricsLandscapePhone] forBarMetrics:UIBarMetricsLandscapePhone];
 
 }
 
