@@ -154,8 +154,10 @@ static SKFUserInterface *defaultSKFUserInterface;
     
     UITextField *textField = [UITextField appearanceWhenContainedIn:[UISearchBar class], nil];
     textField.textColor = [SKFUserInterface almostWhiteColor];
-    textField.font = [SKFUserInterface defaultFontWithSize:12.0f];
+    textField.font = [SKFUserInterface defaultFontWithSize:14.0f];
     textField.background = nil;
+    
+    [[UISearchBar appearance] setSearchTextPositionAdjustment:UIOffsetMake(0, 0.5)];
     
 }
 
@@ -390,6 +392,16 @@ static SKFUserInterface *defaultSKFUserInterface;
 {
     UIImage *image = [SKFCodePaintedUIElements searchBarImageWithColor:[SKFUserInterface almostWhiteColor] borderColor:[SKFUserInterface darkerMainColor]];
     image = [[[UIImage alloc] init] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+    
+    [searchBar setImage:[UIImage imageNamed:@"SearchIcon"] forSearchBarIcon:UISearchBarIconSearch state:UIControlStateNormal];
+//    [searchBar setPositionAdjustment:UIOffsetMake(0.0f, 1.0f) forSearchBarIcon:UISearchBarIconSearch];
+    
+    [searchBar setImage:[UIImage imageNamed:@"SearchClearIcon"] forSearchBarIcon:UISearchBarIconClear state:UIControlStateNormal];
+    [searchBar setPositionAdjustment:UIOffsetMake(0.0f, 0.5f) forSearchBarIcon:UISearchBarIconClear];
+    
+     [searchBar setImage:[UIImage imageNamed:@"SearchClearIconHighlighted"] forSearchBarIcon:UISearchBarIconClear state:UIControlStateHighlighted];
+
+
 //    [searchBar setSearchFieldBackgroundImage:image
 //                                    forState:UIControlStateNormal];
 //    
