@@ -61,7 +61,7 @@ static BFCodePaintedUIElementsImageCache *defaultImageCache;
 {
     if (nil == [BFCodePaintedUIElementsImageCache defaultImageCache].backBarButtonItemImage)
     {
-      [BFCodePaintedUIElementsImageCache defaultImageCache].backBarButtonItemImage = [self backBarButtonItemWithBorderColor:[SKFUserInterface darkerMainColor] fillColor:[UIColor clearColor]];
+      [BFCodePaintedUIElementsImageCache defaultImageCache].backBarButtonItemImage = [self backBarButtonItemWithBorderColor:[UIColor clearColor] fillColor:[SKFUserInterface darkerMainColor]];
     }
 
     return [BFCodePaintedUIElementsImageCache defaultImageCache].backBarButtonItemImage;
@@ -71,7 +71,7 @@ static BFCodePaintedUIElementsImageCache *defaultImageCache;
 {
     if (nil == [BFCodePaintedUIElementsImageCache defaultImageCache].backBarButtonItemHighlightedImage)
     {
-        [BFCodePaintedUIElementsImageCache defaultImageCache].backBarButtonItemHighlightedImage = [self backBarButtonItemWithBorderColor:[SKFUserInterface textColor] fillColor:[SKFUserInterface darkerMainColor]];
+        [BFCodePaintedUIElementsImageCache defaultImageCache].backBarButtonItemHighlightedImage = [self backBarButtonItemWithBorderColor:[UIColor clearColor] fillColor:[SKFUserInterface almostWhiteColor]];
     }
     
     return [BFCodePaintedUIElementsImageCache defaultImageCache].backBarButtonItemHighlightedImage;
@@ -111,7 +111,7 @@ static BFCodePaintedUIElementsImageCache *defaultImageCache;
 {
     if (nil == [BFCodePaintedUIElementsImageCache defaultImageCache].barButtonItemImage)
     {
-        [BFCodePaintedUIElementsImageCache defaultImageCache].barButtonItemImage = [self barButtonItemWithBorderColor:[SKFUserInterface darkerMainColor] fillColor:[UIColor clearColor]];
+        [BFCodePaintedUIElementsImageCache defaultImageCache].barButtonItemImage = [self barButtonItemWithBorderColor:[UIColor clearColor] fillColor:[SKFUserInterface darkerMainColor]];
     }
     
     return [BFCodePaintedUIElementsImageCache defaultImageCache].barButtonItemImage;
@@ -121,7 +121,7 @@ static BFCodePaintedUIElementsImageCache *defaultImageCache;
 { 
     if (nil == [BFCodePaintedUIElementsImageCache defaultImageCache].barButtonItemHighlightedImage)
     {
-        [BFCodePaintedUIElementsImageCache defaultImageCache].barButtonItemHighlightedImage = [self barButtonItemWithBorderColor:[SKFUserInterface textColor] fillColor:[SKFUserInterface darkerMainColor]];
+        [BFCodePaintedUIElementsImageCache defaultImageCache].barButtonItemHighlightedImage = [self barButtonItemWithBorderColor:[UIColor clearColor] fillColor:[SKFUserInterface almostWhiteColor]];
     }
     
     return [BFCodePaintedUIElementsImageCache defaultImageCache].barButtonItemHighlightedImage;

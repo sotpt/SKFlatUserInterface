@@ -133,7 +133,7 @@ static SKFUserInterface *defaultSKFUserInterface;
      @{
                                     UITextAttributeFont : [self defaultFontWithSize:12.0f],
                          UITextAttributeTextShadowColor : [UIColor clearColor],
-                               UITextAttributeTextColor : [self almostWhiteColor]
+                               UITextAttributeTextColor : [self mainColor]
      }
                                                 forState:UIControlStateNormal];
     
@@ -141,7 +141,7 @@ static SKFUserInterface *defaultSKFUserInterface;
      @{
                                     UITextAttributeFont : [self defaultFontWithSize:12.0f],
                          UITextAttributeTextShadowColor : [UIColor clearColor],
-                               UITextAttributeTextColor : [self almostWhiteColor]
+                               UITextAttributeTextColor : [self mainColor]
      }
                                                 forState:UIControlStateHighlighted];
     
