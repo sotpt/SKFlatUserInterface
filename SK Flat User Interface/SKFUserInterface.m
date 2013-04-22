@@ -342,30 +342,32 @@ static SKFUserInterface *defaultSKFUserInterface;
 {
 	if (style == SKFUserInterfaceButtonStyleMainColor)
 	{
-		[button setBackgroundImage:[SKFCodePaintedUIElements buttonImageWithColor:[SKFUserInterface mainColor]
+		[button setBackgroundImage:[SKFCodePaintedUIElements buttonImageWithColor:[SKFUserInterface darkerMainColor]
 															borderColor:[SKFUserInterface darkerMainColor]]
 				forState:UIControlStateNormal];
 		
-		[button setBackgroundImage:[SKFCodePaintedUIElements buttonImageWithColor:[SKFUserInterface darkerMainColor]
-															borderColor:[SKFUserInterface textColor]]
+		[button setBackgroundImage:[SKFCodePaintedUIElements buttonImageWithColor:[SKFUserInterface almostWhiteColor]
+															borderColor:[SKFUserInterface almostWhiteColor]]
 				forState:UIControlStateHighlighted];
 		
-		[button setTitleColor:[SKFUserInterface almostWhiteColor] forState:UIControlStateNormal];
+		[button setTitleColor:[SKFUserInterface mainColor] forState:UIControlStateNormal];
+		[button setTitleColor:[SKFUserInterface mainColor] forState:UIControlStateHighlighted];
+
 		button.titleLabel.font = [SKFUserInterface defaultFontForLabel:button.titleLabel];
 		button.backgroundColor = [UIColor clearColor];
 	}
 	
 	if (style == SKFUserInterfaceButtonStyleAlmostWhiteColor)
 		{
-		[button setBackgroundImage:[SKFCodePaintedUIElements buttonImageWithColor:[SKFUserInterface almostWhiteColor]
+		[button setBackgroundImage:[SKFCodePaintedUIElements buttonImageWithColor:[SKFUserInterface darkerGrayColor]
 															borderColor:[SKFUserInterface darkerGrayColor]]
 				forState:UIControlStateNormal];
 		
-		[button setBackgroundImage:[SKFCodePaintedUIElements buttonImageWithColor:[SKFUserInterface textColor]
-															borderColor:[SKFUserInterface darkerTextColor]]
+		[button setBackgroundImage:[SKFCodePaintedUIElements buttonImageWithColor:[SKFUserInterface mainColor]
+															borderColor:[SKFUserInterface mainColor]]
 				forState:UIControlStateHighlighted];
 		
-		[button setTitleColor:[SKFUserInterface darkerGrayColor] forState:UIControlStateNormal];
+		[button setTitleColor:[SKFUserInterface almostWhiteColor] forState:UIControlStateNormal];
 		[button setTitleColor:[SKFUserInterface almostWhiteColor] forState:UIControlStateHighlighted];
 
 		button.titleLabel.font = [SKFUserInterface defaultFontForLabel:button.titleLabel];
