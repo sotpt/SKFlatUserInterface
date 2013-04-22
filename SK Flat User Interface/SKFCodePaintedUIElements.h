@@ -40,4 +40,7 @@
 + (UIImage *)buttonImageWithColor:(UIColor *)color borderColor:(UIColor *)borderColor;
 + (UIImage *)sandwichButtonImageForBarMetrics:(UIBarMetrics)barMetrics;
 + (UIImage *)searchBarImageWithColor:(UIColor *)color borderColor:(UIColor *)borderColor;
++ (UIImage *)sliderImageWihBorderColor:(UIColor *)borderColor fillColor:(UIColor *)fillColor;
++ (UIImage *)sliderKnobImageWihBorderColor:(UIColor *)borderColor fillColor:(UIColor *)fillColor withText:(NSString *)text;
++ (UIImage *)sliderImageWithColor:(UIColor *)color string:(NSString *)string textAlignment:(NSTextAlignment)textAlignment;
 @end

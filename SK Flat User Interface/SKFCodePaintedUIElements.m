@@ -319,5 +319,94 @@ static BFCodePaintedUIElementsImageCache *defaultImageCache;
     return image;
 }
 
++ (UIImage *)sliderImageWihBorderColor:(UIColor *)borderColor fillColor:(UIColor *)fillColor
+{
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(10.0f, 10.0f), NO, 0.0f);
+    
+	//// Rounded Rectangle Drawing
+	UIBezierPath* roundedRectanglePath = [UIBezierPath bezierPathWithRoundedRect: CGRectMake(0, 0, 10, 10) cornerRadius: 4];
+	
+    [fillColor setFill];
+    [roundedRectanglePath fill];
+    
+    [borderColor setStroke];
+	roundedRectanglePath.lineWidth = 1;
+    [roundedRectanglePath stroke];
+    
+    
+    //create image
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return [image resizableImageWithCapInsets:UIEdgeInsetsMake(5.0f, 5.0f, 5.0f, 5.0f)];
+}
+
++ (UIImage *)sliderKnobImageWihBorderColor:(UIColor *)borderColor fillColor:(UIColor *)fillColor withText:(NSString *)text
+{
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(32.0f, 32.0f), NO, 0.0f);
+    
+	//// Rounded Rectangle Drawing
+	UIBezierPath* roundedRectanglePath = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(1.0f, 1.0f, 30.0f, 30.0f)];
+	
+    [fillColor setFill];
+    [roundedRectanglePath fill];
+    
+    [borderColor setStroke];
+	roundedRectanglePath.lineWidth = 1;
+    [roundedRectanglePath stroke];
+    
+    
+    [[SKFUserInterface mainColor] set];
+    CGRect contentRect = CGRectMake(0, 0, 30.0f, 30.0f);
+
+    UIFont *font = [SKFUserInterface defaultFontWithSize:7.0f];
+    CGFloat fontHeight = font.pointSize;
+    CGFloat yOffset = (contentRect.size.height - fontHeight) / 2.0 - 1.0f;
+    
+    
+    CGRect textRect = CGRectMake(0, yOffset, contentRect.size.width, fontHeight);
+    
+    [text    drawInRect:textRect
+                 withFont:font
+            lineBreakMode:NSLineBreakByClipping
+                alignment:NSTextAlignmentCenter];
+
+    
+    
+    //create image
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
+
+
++ (UIImage *)sliderImageWithColor:(UIColor *)color string:(NSString *)string textAlignment:(NSTextAlignment)textAlignment
+{
+    UIFont *font = [SKFUserInterface defaultFontWithSize:12.0f];
+    CGSize size = [string sizeWithFont:font];
+
+    CGRect contentRect = CGRectMake(0, 0, size.width, 30.0f);
+    UIGraphicsBeginImageContextWithOptions(contentRect.size, NO, 0.0f);
+    [color set];
+    
+    CGFloat fontHeight = font.pointSize;
+    CGFloat yOffset = (contentRect.size.height - fontHeight) / 2.0 - 2.0f;
+    
+    
+    CGRect textRect = CGRectMake(0, yOffset, contentRect.size.width, fontHeight);
+
+    [string    drawInRect:textRect
+                 withFont:font
+            lineBreakMode:NSLineBreakByClipping
+                alignment:textAlignment];
+    
+    //create image
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
+
 
 @end

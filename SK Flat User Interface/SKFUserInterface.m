@@ -87,6 +87,8 @@ static SKFUserInterface *defaultSKFUserInterface;
                                UITextAttributeTextColor : [self almostWhiteColor]
      }];
     
+    [[UINavigationBar appearance] setShadowImage:[[UIImage alloc] init]];
+    
     //  [[UINavigationBar appearance] setTintColor:[self mainColor]];
 }
 
