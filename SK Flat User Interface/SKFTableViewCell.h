@@ -13,4 +13,5 @@
 @property (strong, nonatomic) UIColor *cellSeparatorColor;
 @property (assign, nonatomic) BOOL drawSeparator;
 - (void)configureCell;
+- (void)clearContent;
 @end

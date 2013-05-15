@@ -70,6 +70,9 @@ static SKFUserInterface *defaultSKFUserInterface;
 
     [self configureBarButtonItems];
 	[self configureSearchBar];
+    [self configureSegmentedControl];
+
+    [self configureTabBar];
 }
 
 + (void)configureNavigationBar
@@ -156,11 +159,64 @@ static SKFUserInterface *defaultSKFUserInterface;
     
     UITextField *textField = [UITextField appearanceWhenContainedIn:[UISearchBar class], nil];
     textField.textColor = [SKFUserInterface almostWhiteColor];
-    textField.font = [SKFUserInterface defaultFontWithSize:14.0f];
+    textField.font = [SKFUserInterface defaultFontWithSize:12.0f];
     textField.background = nil;
     
     [[UISearchBar appearance] setSearchTextPositionAdjustment:UIOffsetMake(0, 0.5)];
     
+}
+
++ (void)configureTabBar
+{
+    [[UITabBar appearance] setBackgroundImage:[SKFCodePaintedUIElements tabBarImage]];
+    [[UITabBar appearance] setShadowImage:[[UIImage alloc] init]];
+    [[UITabBar appearance] setSelectionIndicatorImage:[SKFCodePaintedUIElements tabBarSelectionIndicatorImage]];
+    
+    [[UITabBarItem appearance] setTitleTextAttributes:
+     @{
+                                 UITextAttributeFont : [SKFUserInterface defaultFontWithSize:10.0f],
+                            UITextAttributeTextColor : [SKFUserInterface darkerGrayColor]
+     }
+                                             forState:UIControlStateNormal];
+    
+    [[UITabBarItem appearance] setTitleTextAttributes:
+     @{
+                                 UITextAttributeFont : [SKFUserInterface defaultFontWithSize:10.0f],
+                            UITextAttributeTextColor : [SKFUserInterface darkerMainColor]
+     }
+                                             forState: UIControlStateSelected];
+    
+    [[UITabBarItem appearance] setTitlePositionAdjustment:UIOffsetMake(0, 2.0f)];
+}
+
++ (void)configureSegmentedControl
+{
+    [[UISegmentedControl appearance] setBackgroundImage:[SKFCodePaintedUIElements segmentedControlBackgroundImage]
+                                               forState:UIControlStateNormal
+                                             barMetrics:UIBarMetricsDefault];
+    [[UISegmentedControl appearance] setBackgroundImage:[SKFCodePaintedUIElements segmentedControlSelectedBackgroundImage]
+                                               forState:UIControlStateSelected
+                                             barMetrics:UIBarMetricsDefault];
+    [[UISegmentedControl appearance] setDividerImage:[[UIImage alloc] init]
+                                 forLeftSegmentState:UIControlStateNormal
+                                   rightSegmentState:UIControlStateNormal
+                                          barMetrics:UIBarMetricsDefault];
+    
+    [[UISegmentedControl appearance] setTitleTextAttributes:
+     @{
+                                    UITextAttributeFont : [self defaultFontWithSize:12.0f],
+                         UITextAttributeTextShadowColor : [UIColor clearColor],
+                               UITextAttributeTextColor : [self darkerGrayColor]
+     }
+                                                forState:UIControlStateNormal];
+    
+    [[UISegmentedControl appearance] setTitleTextAttributes:
+     @{
+                                       UITextAttributeFont : [self defaultFontWithSize:12.0f],
+                            UITextAttributeTextShadowColor : [UIColor clearColor],
+                                  UITextAttributeTextColor : [self almostWhiteColor]
+     }
+                                                   forState:UIControlStateSelected];
 }
 
 
@@ -295,6 +351,10 @@ static SKFUserInterface *defaultSKFUserInterface;
                            alpha:textColorRGBA[3]];
 }
 
++ (UIColor *)darkerOverlayColor
+{
+    return [UIColor colorWithWhite:0.0 alpha:0.3f];
+}
 
 #pragma mark - fonts
 
@@ -342,22 +402,39 @@ static SKFUserInterface *defaultSKFUserInterface;
 {
 	if (style == SKFUserInterfaceButtonStyleMainColor)
 	{
-		[button setBackgroundImage:[SKFCodePaintedUIElements buttonImageWithColor:[SKFUserInterface darkerMainColor]
-															borderColor:[SKFUserInterface darkerMainColor]]
+		[button setBackgroundImage:[SKFCodePaintedUIElements buttonImageWithColor:[SKFUserInterface mainColor]
+															borderColor:[SKFUserInterface mainColor]]
 				forState:UIControlStateNormal];
 		
-		[button setBackgroundImage:[SKFCodePaintedUIElements buttonImageWithColor:[SKFUserInterface almostWhiteColor]
-															borderColor:[SKFUserInterface almostWhiteColor]]
+		[button setBackgroundImage:[SKFCodePaintedUIElements buttonImageWithColor:[SKFUserInterface mainColor]
+															borderColor:[SKFUserInterface mainColor]]
 				forState:UIControlStateHighlighted];
+		
+		[button setTitleColor:[SKFUserInterface darkerMainColor] forState:UIControlStateNormal];
+		[button setTitleColor:[SKFUserInterface darkerMainColor] forState:UIControlStateHighlighted];
+
+		button.titleLabel.font = [SKFUserInterface defaultFontWithSize:14.0f];
+		button.backgroundColor = [UIColor clearColor];
+	}
+    
+    if (style == SKFUserInterfaceButtonStyleDarkerMainColor)
+	{
+		[button setBackgroundImage:[SKFCodePaintedUIElements buttonImageWithColor:[SKFUserInterface darkerMainColor]
+                                                                      borderColor:[SKFUserInterface darkerMainColor]]
+                          forState:UIControlStateNormal];
+		
+		[button setBackgroundImage:[SKFCodePaintedUIElements buttonImageWithColor:[SKFUserInterface almostWhiteColor]
+                                                                      borderColor:[SKFUserInterface almostWhiteColor]]
+                          forState:UIControlStateHighlighted];
 		
 		[button setTitleColor:[SKFUserInterface mainColor] forState:UIControlStateNormal];
 		[button setTitleColor:[SKFUserInterface mainColor] forState:UIControlStateHighlighted];
-
-		button.titleLabel.font = [SKFUserInterface defaultFontForLabel:button.titleLabel];
+        
+		button.titleLabel.font = [SKFUserInterface defaultFontWithSize:14.0f];
 		button.backgroundColor = [UIColor clearColor];
 	}
 	
-	if (style == SKFUserInterfaceButtonStyleAlmostWhiteColor)
+	if (style == SKFUserInterfaceButtonStyleGrayColor)
 		{
 		[button setBackgroundImage:[SKFCodePaintedUIElements buttonImageWithColor:[SKFUserInterface darkerGrayColor]
 															borderColor:[SKFUserInterface darkerGrayColor]]
@@ -370,9 +447,26 @@ static SKFUserInterface *defaultSKFUserInterface;
 		[button setTitleColor:[SKFUserInterface almostWhiteColor] forState:UIControlStateNormal];
 		[button setTitleColor:[SKFUserInterface almostWhiteColor] forState:UIControlStateHighlighted];
 
-		button.titleLabel.font = [SKFUserInterface defaultFontForLabel:button.titleLabel];
+            button.titleLabel.font = [SKFUserInterface defaultFontWithSize:14.0f];
 		button.backgroundColor = [UIColor clearColor];
 		}
+    
+    if (style == SKFUserInterfaceButtonStyleAlmostWhiteColor)
+    {
+		[button setBackgroundImage:[SKFCodePaintedUIElements buttonImageWithColor:[SKFUserInterface almostWhiteColor]
+                                                                      borderColor:[SKFUserInterface darkerGrayColor]]
+                          forState:UIControlStateNormal];
+		
+		[button setBackgroundImage:[SKFCodePaintedUIElements buttonImageWithColor:[SKFUserInterface mainColor]
+                                                                      borderColor:[SKFUserInterface darkerMainColor]]
+                          forState:UIControlStateHighlighted];
+		
+		[button setTitleColor:[SKFUserInterface textColor] forState:UIControlStateNormal];
+		[button setTitleColor:[SKFUserInterface almostWhiteColor] forState:UIControlStateHighlighted];
+        
+		button.titleLabel.font = [SKFUserInterface defaultFontWithSize:14.0f];
+		button.backgroundColor = [UIColor clearColor];
+    }
 
 	if (style == SKFUserInterfaceButtonStyleTextColor)
 	{
@@ -385,7 +479,7 @@ static SKFUserInterface *defaultSKFUserInterface;
 				forState:UIControlStateHighlighted];
 		
 		[button setTitleColor:[SKFUserInterface almostWhiteColor] forState:UIControlStateNormal];
-		button.titleLabel.font = [SKFUserInterface defaultFontForLabel:button.titleLabel];
+		button.titleLabel.font = [SKFUserInterface defaultFontWithSize:14.0f];
 		button.backgroundColor = [UIColor clearColor];
 		}
 	
@@ -404,6 +498,7 @@ static SKFUserInterface *defaultSKFUserInterface;
     [searchBar setPositionAdjustment:UIOffsetMake(0.0f, 0.5f) forSearchBarIcon:UISearchBarIconClear];
     
      [searchBar setImage:[UIImage imageNamed:@"SearchClearIconHighlighted"] forSearchBarIcon:UISearchBarIconClear state:UIControlStateHighlighted];
+    searchBar.backgroundColor = [UIColor clearColor];
 
 
 //    [searchBar setSearchFieldBackgroundImage:image

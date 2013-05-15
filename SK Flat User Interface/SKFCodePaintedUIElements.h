@@ -37,10 +37,19 @@
 
 + (UIImage *)navigationBarImageForBarMetrics:(UIBarMetrics)barMetrics;
 + (UIImage *)pinImage;
++ (UIImage *)pinImageWithColor:(UIColor *)color borderColor:(UIColor *)borderColor;
++ (UIImage *)pinImageWithColor:(UIColor *)color borderColor:(UIColor *)borderColor height:(CGFloat)height;
+
 + (UIImage *)buttonImageWithColor:(UIColor *)color borderColor:(UIColor *)borderColor;
 + (UIImage *)sandwichButtonImageForBarMetrics:(UIBarMetrics)barMetrics;
 + (UIImage *)searchBarImageWithColor:(UIColor *)color borderColor:(UIColor *)borderColor;
 + (UIImage *)sliderImageWihBorderColor:(UIColor *)borderColor fillColor:(UIColor *)fillColor;
 + (UIImage *)sliderKnobImageWihBorderColor:(UIColor *)borderColor fillColor:(UIColor *)fillColor withText:(NSString *)text;
 + (UIImage *)sliderImageWithColor:(UIColor *)color string:(NSString *)string textAlignment:(NSTextAlignment)textAlignment;
++ (UIImage *)calendarImageForDate:(NSDate *)date;
++ (UIImage *)highlightedCalendarImageForDate:(NSDate *)date;
++ (UIImage *)tabBarImage;
++ (UIImage *)tabBarSelectionIndicatorImage;
++ (UIImage *)segmentedControlBackgroundImage;
++ (UIImage *)segmentedControlSelectedBackgroundImage;
 @end

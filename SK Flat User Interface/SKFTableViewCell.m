@@ -197,19 +197,29 @@
 - (void)drawImageView:(UIImageView *)imageView
 {
     CGRect imageViewFrame = [self convertRect:imageView.frame fromView:self.contentView];
-    imageViewFrame = CGRectMoveY(imageViewFrame, -0.5);
-    
-    if (! [imageView.backgroundColor isEqual:[UIColor clearColor]])
-    {
-        [imageView.backgroundColor set];
-        CGContextFillRect(UIGraphicsGetCurrentContext(), imageViewFrame);
-    }
+//    imageViewFrame = CGRectMoveY(imageViewFrame, -0.5);
     
     if (nil != imageView.image)
     {
+        if (! [imageView.backgroundColor isEqual:[UIColor clearColor]])
+        {
+            [imageView.backgroundColor set];
+            CGContextFillRect(UIGraphicsGetCurrentContext(), imageViewFrame);
+        }
+        
         [self fillRectWithCurrentBackgroundColor:imageViewFrame];
     
-        [imageView.image drawInRect:imageViewFrame];
+        if (self.highlighted && nil != imageView.highlightedImage)
+        {
+            [imageView.highlightedImage drawInRect:imageViewFrame];
+
+        }
+        else
+        {
+            [imageView.image drawInRect:imageViewFrame];
+
+        }
+
     }
 }
 
@@ -373,5 +383,15 @@
         [backgroundColor set];
         CGContextFillRect(UIGraphicsGetCurrentContext(), rect);
     }
+}
+
+- (void)configureCell
+{
+    // only used by subclasses
+}
+
+- (void)clearContent
+{
+    // only used by subclasses
 }
 @end
