@@ -318,6 +318,7 @@
 }
 - (void)drawRect:(CGRect)rect
 {
+    [super drawRect:rect];
     [self fillRectWithCurrentBackgroundColor:rect];
     for (id subview in self.contentView.subviews)
     {
