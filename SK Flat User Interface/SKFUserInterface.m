@@ -87,7 +87,7 @@ static SKFUserInterface *defaultSKFUserInterface;
      @{
                                     UITextAttributeFont : [self defaultFontWithSize:17.0f],
                          UITextAttributeTextShadowColor : [UIColor clearColor],
-                               UITextAttributeTextColor : [self almostWhiteColor]
+                               UITextAttributeTextColor : [self darkerMainColor]
      }];
     
     [[UINavigationBar appearance] setShadowImage:[[UIImage alloc] init]];
@@ -98,11 +98,22 @@ static SKFUserInterface *defaultSKFUserInterface;
 
 + (void)configureToolbar
 {
-    [[UIToolbar appearance] setBackgroundImage:[SKFCodePaintedUIElements navigationBarImageForBarMetrics:UIBarMetricsDefault]
+    [[UIToolbar appearance] setBackgroundImage:[SKFCodePaintedUIElements toolbarImageForBarMetrics:UIBarMetricsDefault toolbarPosition:UIToolbarPositionBottom]
 							forToolbarPosition:UIToolbarPositionAny barMetrics:UIBarMetricsDefault];
+
+    [[UIToolbar appearance] setBackgroundImage:[SKFCodePaintedUIElements toolbarImageForBarMetrics:UIBarMetricsDefault toolbarPosition:UIToolbarPositionAny]
+							forToolbarPosition:UIToolbarPositionAny barMetrics:UIBarMetricsDefault];
+
     
-    [[UIToolbar appearance] setBackgroundImage:[SKFCodePaintedUIElements navigationBarImageForBarMetrics:UIBarMetricsLandscapePhone]
-                                       forToolbarPosition:UIToolbarPositionAny barMetrics:UIBarMetricsLandscapePhone];
+//    [[UIToolbar appearance] setBackgroundImage:[SKFCodePaintedUIElements toolbarImageForBarMetrics:UIBarMetricsLandscapePhone toolbarPosition:UIToolbarPositionTop]
+//							forToolbarPosition:UIToolbarPositionTop barMetrics:UIBarMetricsLandscapePhone];
+//    
+//    [[UIToolbar appearance] setBackgroundImage:[SKFCodePaintedUIElements toolbarImageForBarMetrics:UIBarMetricsLandscapePhone toolbarPosition:UIToolbarPositionBottom]
+//							forToolbarPosition:UIToolbarPositionBottom barMetrics:UIBarMetricsLandscapePhone];
+
+    
+    [[UIToolbar appearance] setShadowImage:[[UIImage alloc] init] forToolbarPosition:UIToolbarPositionAny];
+
     
 //    [[UIToolbar appearance] setTitleTextAttributes:
 //     @{
@@ -214,7 +225,7 @@ static SKFUserInterface *defaultSKFUserInterface;
      @{
                                        UITextAttributeFont : [self defaultFontWithSize:12.0f],
                             UITextAttributeTextShadowColor : [UIColor clearColor],
-                                  UITextAttributeTextColor : [self almostWhiteColor]
+                                  UITextAttributeTextColor : [self darkerMainColor]
      }
                                                    forState:UIControlStateSelected];
 }
@@ -277,6 +288,21 @@ static SKFUserInterface *defaultSKFUserInterface;
                            alpha:mainColorHSBA[3]];
 }
 
+
++ (UIColor *)veryLightGrayColor
+{
+    UIColor *mainColor = [self almostWhiteColor];
+    CGFloat mainColorHSBA[4];
+    [mainColor getHue:&mainColorHSBA[0]
+           saturation:&mainColorHSBA[1]
+           brightness:&mainColorHSBA[2]
+                alpha:&mainColorHSBA[3]];
+    
+    return [UIColor colorWithHue:mainColorHSBA[0]
+                      saturation:mainColorHSBA[1]
+                      brightness:mainColorHSBA[2] * 0.96f
+                           alpha:mainColorHSBA[3]];
+}
 
 + (UIColor *)lighterGrayColor
 {
@@ -488,8 +514,8 @@ static SKFUserInterface *defaultSKFUserInterface;
 
 + (void)styleSearchBar:(UISearchBar *)searchBar
 {
-    UIImage *image = [SKFCodePaintedUIElements searchBarImageWithColor:[SKFUserInterface almostWhiteColor] borderColor:[SKFUserInterface darkerMainColor]];
-    image = [[[UIImage alloc] init] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+//    UIImage *image = [SKFCodePaintedUIElements searchBarImageWithColor:[SKFUserInterface almostWhiteColor] borderColor:[SKFUserInterface darkerMainColor]];
+//    image = [[[UIImage alloc] init] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
     
     [searchBar setImage:[UIImage imageNamed:@"SearchIcon"] forSearchBarIcon:UISearchBarIconSearch state:UIControlStateNormal];
 //    [searchBar setPositionAdjustment:UIOffsetMake(0.0f, 1.0f) forSearchBarIcon:UISearchBarIconSearch];

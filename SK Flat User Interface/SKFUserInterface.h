@@ -55,6 +55,7 @@ typedef NS_ENUM(NSUInteger, SKFUserInterfaceButtonStyle)
 + (UIColor *)almostWhiteColor;
 + (UIColor *)darkerTextColor;
 + (UIColor *)darkerOverlayColor;
++ (UIColor *)veryLightGrayColor;
 
 + (UIColor *)color:(UIColor *)color withSaturation:(CGFloat)saturation;
 
