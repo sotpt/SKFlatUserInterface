@@ -207,6 +207,41 @@ static BFCodePaintedUIElementsImageCache *defaultImageCache;
     return image;
 }
 
++ (UIImage *)toolbarImageForBarMetrics:(UIBarMetrics)barMetrics toolbarPosition:(UIToolbarPosition)toolbarPosition;
+{
+    CGFloat navigationBarHeight = 44.0f;
+    
+    if (barMetrics == UIBarMetricsLandscapePhone)
+    {
+        navigationBarHeight = 32.0f;
+    }
+    
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(1, navigationBarHeight), NO, 0.0f);
+    
+    
+    UIColor *mainColor = [SKFUserInterface mainColor];
+    
+    UIColor *bottomBorderColor = [SKFUserInterface darkerMainColor];
+    
+    CGFloat bottomBorderHeight = 1.0f;
+    //// bar Drawing
+    UIBezierPath* barPath = [UIBezierPath bezierPathWithRect: CGRectMake(0, 0, 320, navigationBarHeight)];
+    [mainColor setFill];
+    [barPath fill];
+    
+    CGFloat borderPosition = (toolbarPosition == UIToolbarPositionTop) ? navigationBarHeight - bottomBorderHeight : 0.0f;
+    //// bottom Border Drawing
+    UIBezierPath* bottomBorderPath = [UIBezierPath bezierPathWithRect: CGRectMake(0, borderPosition, 320, bottomBorderHeight)];
+    [bottomBorderColor setFill];
+    [bottomBorderPath fill];
+    
+    //create image
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
+
 + (UIImage *)tabBarSelectionIndicatorImage
 {
     UIGraphicsBeginImageContextWithOptions(CGSizeMake(160, 49.0f), NO, 0.0f);

@@ -36,6 +36,8 @@
 + (UIImage *)barButtonItemHighlightedImage;
 
 + (UIImage *)navigationBarImageForBarMetrics:(UIBarMetrics)barMetrics;
++ (UIImage *)toolbarImageForBarMetrics:(UIBarMetrics)barMetrics toolbarPosition:(UIToolbarPosition)toolbarPosition;
+
 + (UIImage *)pinImage;
 + (UIImage *)pinImageWithColor:(UIColor *)color borderColor:(UIColor *)borderColor;
 + (UIImage *)pinImageWithColor:(UIColor *)color borderColor:(UIColor *)borderColor height:(CGFloat)height;
