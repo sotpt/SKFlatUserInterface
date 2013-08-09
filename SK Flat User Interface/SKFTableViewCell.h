@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface SKFTableViewCell : UITableViewCell
+
 @property (strong, nonatomic) UIColor *highlightedBackgroundColor;
+
 @property (strong, nonatomic) UIColor *cellSeparatorColor;
 @property (assign, nonatomic) BOOL drawSeparator;
 - (void)configureCell;
