@@ -219,9 +219,9 @@ static BFCodePaintedUIElementsImageCache *defaultImageCache;
     UIGraphicsBeginImageContextWithOptions(CGSizeMake(1, navigationBarHeight), NO, 0.0f);
     
     
-    UIColor *mainColor = [SKFUserInterface mainColor];
+    UIColor *mainColor = [SKFUserInterface almostWhiteColor];
     
-    UIColor *bottomBorderColor = [SKFUserInterface darkerMainColor];
+    UIColor *bottomBorderColor = [SKFUserInterface darkerGrayColor];
     
     CGFloat bottomBorderHeight = 1.0f;
     //// bar Drawing
@@ -275,7 +275,7 @@ static BFCodePaintedUIElementsImageCache *defaultImageCache;
     UIGraphicsBeginImageContextWithOptions(CGSizeMake(320, 49.0f), NO, 0.0f);
     
     
-    UIColor *mainColor = [SKFUserInterface grayColor];
+    UIColor *mainColor = [SKFUserInterface almostWhiteColor];
     
     UIColor *bottomBorderColor = [SKFUserInterface darkerGrayColor];
     
@@ -483,7 +483,7 @@ static BFCodePaintedUIElementsImageCache *defaultImageCache;
     [roundedRectanglePath fill];
 	
     [borderColor setStroke];
-	roundedRectanglePath.lineWidth = 1;
+	roundedRectanglePath.lineWidth = 0.5;
     [roundedRectanglePath stroke];
 	
     
@@ -542,12 +542,12 @@ static BFCodePaintedUIElementsImageCache *defaultImageCache;
     return image;
 }
 
-+ (UIImage *)sliderImageWihBorderColor:(UIColor *)borderColor fillColor:(UIColor *)fillColor
++ (UIImage *)sliderImageWithBorderColor:(UIColor *)borderColor fillColor:(UIColor *)fillColor
 {
-    UIGraphicsBeginImageContextWithOptions(CGSizeMake(10.0f, 10.0f), NO, 0.0f);
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(2.0f, 2.0f), NO, 0.0f);
     
 	//// Rounded Rectangle Drawing
-	UIBezierPath* roundedRectanglePath = [UIBezierPath bezierPathWithRoundedRect: CGRectMake(0, 0, 10, 10) cornerRadius: [SKFUserInterface roundedCornerRadius]];
+	UIBezierPath* roundedRectanglePath = [UIBezierPath bezierPathWithRoundedRect: CGRectMake(0, 0, 2, 2) cornerRadius: [SKFUserInterface roundedCornerRadius]];
 	
     [fillColor setFill];
     [roundedRectanglePath fill];
@@ -561,26 +561,35 @@ static BFCodePaintedUIElementsImageCache *defaultImageCache;
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
-    return [image resizableImageWithCapInsets:UIEdgeInsetsMake(5.0f, 5.0f, 5.0f, 5.0f)];
+    return [image resizableImageWithCapInsets:UIEdgeInsetsMake(1.0f, 1.0f, 1.0f, 1.0f)];
 }
 
-+ (UIImage *)sliderKnobImageWihBorderColor:(UIColor *)borderColor fillColor:(UIColor *)fillColor withText:(NSString *)text
++ (UIImage *)sliderKnobImageWithBorderColor:(UIColor *)borderColor fillColor:(UIColor *)fillColor withText:(NSString *)text
 {
     UIGraphicsBeginImageContextWithOptions(CGSizeMake(32.0f, 32.0f), NO, 0.0f);
     
 	//// Rounded Rectangle Drawing
 	UIBezierPath* roundedRectanglePath = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(1.0f, 1.0f, 30.0f, 30.0f)];
 	
-    [fillColor setFill];
-    [roundedRectanglePath fill];
+//    [fillColor setFill];
+//    [roundedRectanglePath fill];
     
     [borderColor setStroke];
 	roundedRectanglePath.lineWidth = 1;
     [roundedRectanglePath stroke];
     
+    [borderColor setFill];
+    [roundedRectanglePath fill];
     
-    [[SKFUserInterface mainColor] set];
-    CGRect contentRect = CGRectMake(0, 0, 30.0f, 30.0f);
+    UIBezierPath* roundedRectanglePath1 = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(2.0f, 2.0f, 28.0f, 28.0f)];
+    	roundedRectanglePath1.lineWidth = 1;
+    [fillColor setStroke];
+    [roundedRectanglePath1 stroke];
+    
+
+    
+    [[SKFUserInterface almostWhiteColor] set];
+    CGRect contentRect = CGRectMake(1.0f, 1.0f, 30.0f, 30.0f);
 
     UIFont *font = [SKFUserInterface defaultFontWithSize:7.0f];
     CGFloat fontHeight = font.pointSize;
@@ -633,25 +642,18 @@ static BFCodePaintedUIElementsImageCache *defaultImageCache;
     return image;
 }
 
-+ (UIImage *)calendarImageForDate:(NSDate *)date
++ (UIImage *)calendarImageForDate:(NSDate *)date withColor:(UIColor *)color width:(CGFloat)width
 {
     if (date == nil)
     {
         return nil;
     }
 
-    UIImage *image = [BFCodePaintedUIElementsImageCache defaultImageCache].calendarImageCache[date];
+    CGSize size =CGSizeMake(width, width);
     
-    if (nil == image)
-    {
-    
-    
-    UIGraphicsBeginImageContextWithOptions(CGSizeMake(30.0f, 30.0f), NO, 0.0f);
-    //// Color Declarations
-    UIColor* color = [SKFUserInterface darkerGrayColor];
-    UIColor* fillColor = [SKFUserInterface almostWhiteColor];
-    UIColor* color2 =[SKFUserInterface almostWhiteColor];
-    
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0.0f);
+
+//    
         NSDateComponents *components = [[NSCalendar currentCalendar] components:NSYearCalendarUnit fromDate:date];
     //// Abstracted Attributes
     NSString* textContent = [NSString stringWithFormat:@"%d", components.year];
@@ -659,116 +661,51 @@ static BFCodePaintedUIElementsImageCache *defaultImageCache;
     
     
     //// Rounded Rectangle Drawing
-    UIBezierPath* roundedRectanglePath = [UIBezierPath bezierPathWithRoundedRect: CGRectMake(0.5, 0.5, 29, 29) cornerRadius: [SKFUserInterface roundedCornerRadius]];
-    [color2 setFill];
-    [roundedRectanglePath fill];
+    UIBezierPath* roundedRectanglePath = [UIBezierPath bezierPathWithRoundedRect: CGRectMake(0.5, 0.5, size.width - 1.0f, size.height - 1.0f) cornerRadius: [SKFUserInterface roundedCornerRadius]];
     [color setStroke];
     roundedRectanglePath.lineWidth = 1;
     [roundedRectanglePath stroke];
-    
-    //// Bezier Drawing
-    UIBezierPath* bezierPath = [UIBezierPath bezierPath];
-    [bezierPath moveToPoint: CGPointMake(29.5, 2.41)];
-    [bezierPath addLineToPoint: CGPointMake(29.5, 11.5)];
-    [bezierPath addLineToPoint: CGPointMake(0.5, 11.5)];
-    [bezierPath addLineToPoint: CGPointMake(0.5, 2.41)];
-    [bezierPath addCurveToPoint: CGPointMake(2.06, 0.5) controlPoint1: CGPointMake(0.86, 1.61) controlPoint2: CGPointMake(1.41, 0.94)];
-    [bezierPath addLineToPoint: CGPointMake(27.94, 0.5)];
-    [bezierPath addCurveToPoint: CGPointMake(29.5, 2.41) controlPoint1: CGPointMake(28.59, 0.94) controlPoint2: CGPointMake(29.14, 1.61)];
-    [bezierPath closePath];
+
     [color setFill];
-    [bezierPath fill];
+    
+    NSUInteger fontSize = 8 * width/30;
     
     //// Text Drawing
-    CGRect textRect = CGRectMake(0, 0, 30, 15);
-    [fillColor setFill];
-    [textContent drawInRect: textRect withFont: [UIFont fontWithName: @"Futura-Medium" size: 8] lineBreakMode: NSLineBreakByWordWrapping alignment: NSTextAlignmentCenter];
+    CGRect textRect = CGRectMake(0, 1, size.width, size.height / 2.0f);
+    [color setFill];
+    [textContent drawInRect: textRect withFont: [SKFUserInterface defaultFontWithSize:fontSize] lineBreakMode: NSLineBreakByWordWrapping alignment: NSTextAlignmentCenter];
     
+    UIBezierPath *linePath = [UIBezierPath bezierPath];
+    [linePath moveToPoint:CGPointMake(0, 0.4f * size.height)];
+    [linePath addLineToPoint:CGPointMake(size.width, 0.4f * size.height)];
+    [color setStroke];
+    linePath.lineWidth = 1.0f;
+    [linePath stroke];
     
     //// Text 2 Drawing
-    CGRect text2Rect = CGRectMake(0, 14, 30, 20);
+    CGRect text2Rect = CGRectMake(0, 0.5 * size.height, size.width, 0.3 * size.height);
     [color setFill];
-    [text2Content drawInRect: text2Rect withFont: [UIFont fontWithName: @"Futura-Medium" size: 8] lineBreakMode: NSLineBreakByWordWrapping alignment: NSTextAlignmentCenter];
+    [text2Content drawInRect: text2Rect withFont:[SKFUserInterface defaultFontWithSize:fontSize] lineBreakMode: NSLineBreakByWordWrapping alignment: NSTextAlignmentCenter];
     
     
     
     //create image
-    image = UIGraphicsGetImageFromCurrentImageContext();
+  UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
         
-    [[BFCodePaintedUIElementsImageCache defaultImageCache].calendarImageCache setObject:image forKey:date];
-    }
+//    [[BFCodePaintedUIElementsImageCache defaultImageCache].calendarImageCache setObject:image forKey:date];
+//    }
     
     return image;
 }
 
 + (UIImage *)highlightedCalendarImageForDate:(NSDate *)date
 {
-    if (date == nil)
-    {
-        return nil;
-    }
-
-    UIImage *image = [BFCodePaintedUIElementsImageCache defaultImageCache].highlightedCalendarImageCache[date];
-    
-    if (nil == image)
-    {
-        
-        
-        UIGraphicsBeginImageContextWithOptions(CGSizeMake(30.0f, 30.0f), NO, 0.0f);
-        //// Color Declarations
-        UIColor* color = [SKFUserInterface darkerMainColor];
-        UIColor* fillColor = [SKFUserInterface mainColor];
-        UIColor* color2 =[SKFUserInterface mainColor];
-        
-        NSDateComponents *components = [[NSCalendar currentCalendar] components:NSYearCalendarUnit fromDate:date];
-        //// Abstracted Attributes
-        NSString* textContent = [NSString stringWithFormat:@"%d", components.year];
-        NSString* text2Content = [[BFCodePaintedUIElementsImageCache defaultImageCache].dateFormatter stringFromDate:date];
-        
-        
-        //// Rounded Rectangle Drawing
-        UIBezierPath* roundedRectanglePath = [UIBezierPath bezierPathWithRoundedRect: CGRectMake(0.5, 0.5, 29, 29) cornerRadius: [SKFUserInterface roundedCornerRadius]];
-        [color2 setFill];
-        [roundedRectanglePath fill];
-        [color setStroke];
-        roundedRectanglePath.lineWidth = 1;
-        [roundedRectanglePath stroke];
-        
-        //// Bezier Drawing
-        UIBezierPath* bezierPath = [UIBezierPath bezierPath];
-        [bezierPath moveToPoint: CGPointMake(29.5, 2.41)];
-        [bezierPath addLineToPoint: CGPointMake(29.5, 11.5)];
-        [bezierPath addLineToPoint: CGPointMake(0.5, 11.5)];
-        [bezierPath addLineToPoint: CGPointMake(0.5, 2.41)];
-        [bezierPath addCurveToPoint: CGPointMake(2.06, 0.5) controlPoint1: CGPointMake(0.86, 1.61) controlPoint2: CGPointMake(1.41, 0.94)];
-        [bezierPath addLineToPoint: CGPointMake(27.94, 0.5)];
-        [bezierPath addCurveToPoint: CGPointMake(29.5, 2.41) controlPoint1: CGPointMake(28.59, 0.94) controlPoint2: CGPointMake(29.14, 1.61)];
-        [bezierPath closePath];
-        [color setFill];
-        [bezierPath fill];
-        
-        //// Text Drawing
-        CGRect textRect = CGRectMake(0, 0, 30, 15);
-        [fillColor setFill];
-        [textContent drawInRect: textRect withFont: [UIFont fontWithName: @"Futura-Medium" size: 8] lineBreakMode: NSLineBreakByWordWrapping alignment: NSTextAlignmentCenter];
-        
-        
-        //// Text 2 Drawing
-        CGRect text2Rect = CGRectMake(0, 14, 30, 20);
-        [color setFill];
-        [text2Content drawInRect: text2Rect withFont: [UIFont fontWithName: @"Futura-Medium" size: 8] lineBreakMode: NSLineBreakByWordWrapping alignment: NSTextAlignmentCenter];
-        
-        
-        
-        //create image
-        image = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-        
-        [[BFCodePaintedUIElementsImageCache defaultImageCache].highlightedCalendarImageCache setObject:image forKey:date];
-    }
-    
-    return image;
+    return [SKFCodePaintedUIElements calendarImageForDate:date withColor:[SKFUserInterface almostWhiteColor] width:30.0f];
 }
 
++ (UIImage *)calendarImageForDate:(NSDate *)date
+{
+    return [SKFCodePaintedUIElements calendarImageForDate:date withColor:[SKFUserInterface darkerGrayColor] width:30.0f];
+}
 @end

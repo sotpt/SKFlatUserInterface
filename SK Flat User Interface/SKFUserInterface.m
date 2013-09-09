@@ -77,42 +77,36 @@ static SKFUserInterface *defaultSKFUserInterface;
 
 + (void)configureNavigationBar
 {
-    [[UINavigationBar appearance] setBackgroundImage:[SKFCodePaintedUIElements navigationBarImageForBarMetrics:UIBarMetricsDefault]
-                                       forBarMetrics:UIBarMetricsDefault];
-    
-    [[UINavigationBar appearance] setBackgroundImage:[SKFCodePaintedUIElements navigationBarImageForBarMetrics:UIBarMetricsLandscapePhone]
-                                       forBarMetrics:UIBarMetricsLandscapePhone];
-    
     [[UINavigationBar appearance] setTitleTextAttributes:
      @{
                                     UITextAttributeFont : [self defaultFontWithSize:17.0f],
                          UITextAttributeTextShadowColor : [UIColor clearColor],
-                               UITextAttributeTextColor : [self darkerMainColor]
+                               UITextAttributeTextColor : [self almostWhiteColor]
      }];
     
-    [[UINavigationBar appearance] setShadowImage:[[UIImage alloc] init]];
+
+    // iOS 7 code
+    UINavigationBar *navigationBar = [[UINavigationBar alloc] init];
     
-    //  [[UINavigationBar appearance] setTintColor:[self mainColor]];
+    if ([navigationBar respondsToSelector:@selector(setBarTintColor:)])
+    {
+        [[UINavigationBar appearance] setBarTintColor:[SKFUserInterface mainColor]];
+    }
+    else
+    {
+        [[UINavigationBar appearance] setBackgroundImage:[SKFCodePaintedUIElements navigationBarImageForBarMetrics:UIBarMetricsDefault]
+                                           forBarMetrics:UIBarMetricsDefault];
+
+        [[UINavigationBar appearance] setBackgroundImage:[SKFCodePaintedUIElements navigationBarImageForBarMetrics:UIBarMetricsLandscapePhone]
+                                           forBarMetrics:UIBarMetricsLandscapePhone];
+        [[UINavigationBar appearance] setShadowImage:[[UIImage alloc] init]];
+    }
+    
 }
 
 
 + (void)configureToolbar
 {
-    [[UIToolbar appearance] setBackgroundImage:[SKFCodePaintedUIElements toolbarImageForBarMetrics:UIBarMetricsDefault toolbarPosition:UIToolbarPositionBottom]
-							forToolbarPosition:UIToolbarPositionAny barMetrics:UIBarMetricsDefault];
-
-    [[UIToolbar appearance] setBackgroundImage:[SKFCodePaintedUIElements toolbarImageForBarMetrics:UIBarMetricsDefault toolbarPosition:UIToolbarPositionAny]
-							forToolbarPosition:UIToolbarPositionAny barMetrics:UIBarMetricsDefault];
-
-    
-//    [[UIToolbar appearance] setBackgroundImage:[SKFCodePaintedUIElements toolbarImageForBarMetrics:UIBarMetricsLandscapePhone toolbarPosition:UIToolbarPositionTop]
-//							forToolbarPosition:UIToolbarPositionTop barMetrics:UIBarMetricsLandscapePhone];
-//    
-//    [[UIToolbar appearance] setBackgroundImage:[SKFCodePaintedUIElements toolbarImageForBarMetrics:UIBarMetricsLandscapePhone toolbarPosition:UIToolbarPositionBottom]
-//							forToolbarPosition:UIToolbarPositionBottom barMetrics:UIBarMetricsLandscapePhone];
-
-    
-    [[UIToolbar appearance] setShadowImage:[[UIImage alloc] init] forToolbarPosition:UIToolbarPositionAny];
 
     
 //    [[UIToolbar appearance] setTitleTextAttributes:
@@ -122,46 +116,70 @@ static SKFUserInterface *defaultSKFUserInterface;
 //                               UITextAttributeTextColor : [self almostWhiteColor]
 //     }];
     
-    //  [[UINavigationBar appearance] setTintColor:[self mainColor]];
+    //
+    
+    
+    // iOS 7 code
+    UIToolbar *toolbar = [[UIToolbar alloc] init];
+    
+    if ([toolbar respondsToSelector:@selector(setBarTintColor:)])
+    {
+        [[UIToolbar appearance] setBarTintColor:[SKFUserInterface almostWhiteColor]];
+    }
+    else
+    {
+    [[UIToolbar appearance] setBackgroundImage:[SKFCodePaintedUIElements toolbarImageForBarMetrics:UIBarMetricsDefault toolbarPosition:UIToolbarPositionBottom]
+							forToolbarPosition:UIToolbarPositionAny barMetrics:UIBarMetricsDefault];
+
+    [[UIToolbar appearance] setBackgroundImage:[SKFCodePaintedUIElements toolbarImageForBarMetrics:UIBarMetricsDefault toolbarPosition:UIToolbarPositionAny]
+							forToolbarPosition:UIToolbarPositionAny barMetrics:UIBarMetricsDefault];
+
+
+
+
+    [[UIToolbar appearance] setShadowImage:[[UIImage alloc] init] forToolbarPosition:UIToolbarPositionAny];
+
+    }
+
 }
 
 + (void)configureBarButtonItems
 {
-    [[UIBarButtonItem appearance] setBackButtonBackgroundImage:[SKFCodePaintedUIElements backBarButtonItemImage]
-                                                      forState:UIControlStateNormal
-                                                    barMetrics:UIBarMetricsDefault];
-    
-    [[UIBarButtonItem appearance] setBackButtonBackgroundImage:[SKFCodePaintedUIElements backBarButtonItemHighlightedImage]
-                                                      forState:UIControlStateHighlighted
-                                                    barMetrics:UIBarMetricsDefault];
-
-	[[UIBarButtonItem appearance] setBackgroundImage:[SKFCodePaintedUIElements barButtonItemImage]
-                                                      forState:UIControlStateNormal
-                                                    barMetrics:UIBarMetricsDefault];
-    
-    [[UIBarButtonItem appearance] setBackgroundImage:[SKFCodePaintedUIElements barButtonItemHighlightedImage]
-                                                      forState:UIControlStateHighlighted
-                                                    barMetrics:UIBarMetricsDefault];
-	
+//    [[UIBarButtonItem appearance] setBackButtonBackgroundImage:[UIImage imageNamed:@"BackButton"]
+//                                                      forState:UIControlStateNormal
+//                                                    barMetrics:UIBarMetricsDefault];
+//    
+//    [[UIBarButtonItem appearance] setBackButtonBackgroundImage:[UIImage imageNamed:@"BackButtonHighlighted"]
+//                                                      forState:UIControlStateHighlighted
+//                                                    barMetrics:UIBarMetricsDefault];
+//
+//	[[UIBarButtonItem appearance] setBackgroundImage:[SKFCodePaintedUIElements barButtonItemImage]
+//                                                      forState:UIControlStateNormal
+//                                                    barMetrics:UIBarMetricsDefault];
+//    
+//    [[UIBarButtonItem appearance] setBackgroundImage:[SKFCodePaintedUIElements barButtonItemHighlightedImage]
+//                                                      forState:UIControlStateHighlighted
+//                                                    barMetrics:UIBarMetricsDefault];
+//	
     
     
     [[UIBarButtonItem appearance] setTitleTextAttributes:
      @{
-                                    UITextAttributeFont : [self defaultFontWithSize:12.0f],
-                         UITextAttributeTextShadowColor : [UIColor clearColor],
-                               UITextAttributeTextColor : [self mainColor]
+                                    UITextAttributeFont : [self defaultFontWithSize:17.0f],
+//                         UITextAttributeTextShadowColor : [UIColor clearColor],
+//                               UITextAttributeTextColor : [self mainColor]
      }
                                                 forState:UIControlStateNormal];
     
     [[UIBarButtonItem appearance] setTitleTextAttributes:
      @{
-                                    UITextAttributeFont : [self defaultFontWithSize:12.0f],
-                         UITextAttributeTextShadowColor : [UIColor clearColor],
-                               UITextAttributeTextColor : [self mainColor]
+                                    UITextAttributeFont : [self defaultFontWithSize:17.0f],
+//                         UITextAttributeTextShadowColor : [UIColor clearColor],
+//                               UITextAttributeTextColor : [self mainColor]
      }
                                                 forState:UIControlStateHighlighted];
     
-    [[UIBarButtonItem appearance] setTitlePositionAdjustment:UIOffsetMake(0.0f, 2.0f) forBarMetrics:UIBarMetricsDefault];
+//    [[UIBarButtonItem appearance] setTitlePositionAdjustment:UIOffsetMake(0.0f, 2.0f) forBarMetrics:UIBarMetricsDefault];
 }
 
 + (void)configureSearchBar
@@ -179,9 +197,13 @@ static SKFUserInterface *defaultSKFUserInterface;
 
 + (void)configureTabBar
 {
-    [[UITabBar appearance] setBackgroundImage:[SKFCodePaintedUIElements tabBarImage]];
-    [[UITabBar appearance] setShadowImage:[[UIImage alloc] init]];
-    [[UITabBar appearance] setSelectionIndicatorImage:[SKFCodePaintedUIElements tabBarSelectionIndicatorImage]];
+//    [[UITabBar appearance] setBackgroundImage:[SKFCodePaintedUIElements tabBarImage]];
+//    [[UITabBar appearance] setShadowImage:[[UIImage alloc] init]];
+    
+//    [[UITabBar appearance] setSelectionIndicatorImage:[[UIImage alloc] init]];
+//    [[UITabBar appearance] setSelectionIndicatorImage:[[UIImage alloc] init]];
+
+    [[UITabBar appearance] setBackgroundColor:[SKFUserInterface almostWhiteColor]];
     
     [[UITabBarItem appearance] setTitleTextAttributes:
      @{
@@ -193,11 +215,11 @@ static SKFUserInterface *defaultSKFUserInterface;
     [[UITabBarItem appearance] setTitleTextAttributes:
      @{
                                  UITextAttributeFont : [SKFUserInterface defaultFontWithSize:10.0f],
-                            UITextAttributeTextColor : [SKFUserInterface darkerMainColor]
+                            UITextAttributeTextColor : [SKFUserInterface mainColor]
      }
                                              forState: UIControlStateSelected];
     
-    [[UITabBarItem appearance] setTitlePositionAdjustment:UIOffsetMake(0, 2.0f)];
+//    [[UITabBarItem appearance] setTitlePositionAdjustment:UIOffsetMake(0, 2.0f)];
 }
 
 + (void)configureSegmentedControl
@@ -225,7 +247,7 @@ static SKFUserInterface *defaultSKFUserInterface;
      @{
                                        UITextAttributeFont : [self defaultFontWithSize:12.0f],
                             UITextAttributeTextShadowColor : [UIColor clearColor],
-                                  UITextAttributeTextColor : [self darkerMainColor]
+                                  UITextAttributeTextColor : [self almostWhiteColor]
      }
                                                    forState:UIControlStateSelected];
 }
@@ -241,7 +263,7 @@ static SKFUserInterface *defaultSKFUserInterface;
 + (UIColor *)darkerMainColor
 {
     UIColor* mainColor = [self mainColor];
-    CGFloat brightness = 0.7;
+    CGFloat brightness = 0.6;
     
     CGFloat mainColorRGBA[4];
     [mainColor getRed:&mainColorRGBA[0]
@@ -298,10 +320,7 @@ static SKFUserInterface *defaultSKFUserInterface;
            brightness:&mainColorHSBA[2]
                 alpha:&mainColorHSBA[3]];
     
-    return [UIColor colorWithHue:mainColorHSBA[0]
-                      saturation:mainColorHSBA[1]
-                      brightness:mainColorHSBA[2] * 0.96f
-                           alpha:mainColorHSBA[3]];
+    return [UIColor colorWithWhite:0.96 alpha:1.0f];
 }
 
 + (UIColor *)lighterGrayColor
@@ -357,7 +376,8 @@ static SKFUserInterface *defaultSKFUserInterface;
 
 + (UIColor *)almostWhiteColor
 {
-    return [UIColor colorWithHue:0.0f saturation:0.0f brightness:0.98f alpha:1.0f];
+    return [UIColor whiteColor];
+//    return [UIColor colorWithHue:0.0f saturation:0.0f brightness:0.98f alpha:1.0f];
 }
 
 + (UIColor *)darkerTextColor

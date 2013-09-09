@@ -45,11 +45,12 @@
 + (UIImage *)buttonImageWithColor:(UIColor *)color borderColor:(UIColor *)borderColor;
 + (UIImage *)sandwichButtonImageForBarMetrics:(UIBarMetrics)barMetrics;
 + (UIImage *)searchBarImageWithColor:(UIColor *)color borderColor:(UIColor *)borderColor;
-+ (UIImage *)sliderImageWihBorderColor:(UIColor *)borderColor fillColor:(UIColor *)fillColor;
-+ (UIImage *)sliderKnobImageWihBorderColor:(UIColor *)borderColor fillColor:(UIColor *)fillColor withText:(NSString *)text;
++ (UIImage *)sliderImageWithBorderColor:(UIColor *)borderColor fillColor:(UIColor *)fillColor;
++ (UIImage *)sliderKnobImageWithBorderColor:(UIColor *)borderColor fillColor:(UIColor *)fillColor withText:(NSString *)text;
 + (UIImage *)sliderImageWithColor:(UIColor *)color string:(NSString *)string textAlignment:(NSTextAlignment)textAlignment;
 + (UIImage *)calendarImageForDate:(NSDate *)date;
 + (UIImage *)highlightedCalendarImageForDate:(NSDate *)date;
++ (UIImage *)calendarImageForDate:(NSDate *)date withColor:(UIColor *)color width:(CGFloat)width;
 + (UIImage *)tabBarImage;
 + (UIImage *)tabBarSelectionIndicatorImage;
 + (UIImage *)segmentedControlBackgroundImage;

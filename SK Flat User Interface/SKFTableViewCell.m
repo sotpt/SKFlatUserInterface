@@ -14,6 +14,7 @@
 #import "SKFRoundedCornersLabel.h"
 
 @interface SKFTableViewCell()
+@property (nonatomic, strong, readwrite) UIView *seperatorView;
 @end
 
 @implementation SKFTableViewCell
@@ -29,6 +30,8 @@
         {
             self.selectedBackgroundView = [[UIView alloc] init];
         }
+        
+        [self setupSeparatorView];
     }
     return self;
 }
@@ -42,7 +45,15 @@
     self.selectedBackgroundView.backgroundColor = self.highlightedBackgroundColor;
 
     [self configureCell];
+    [self setupSeparatorView];
 
+}
+
+- (void)setupSeparatorView
+{
+    self.seperatorView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.frame) - 1.0f, CGRectGetWidth(self.frame), 1.0f)];
+    self.seperatorView.backgroundColor = [UIColor greenColor];
+    [self addSubview:self.seperatorView];
 }
 
 - (void)setHighlightedBackgroundColor:(UIColor *)highlightedBackgroundColor
@@ -51,9 +62,16 @@
     self.selectedBackgroundView.backgroundColor = highlightedBackgroundColor;
 }
 
+- (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated
+{
+    [super setHighlighted:highlighted animated:animated];
+    [self bringSubviewToFront:self.seperatorView];
+}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
+    [self bringSubviewToFront:self.seperatorView];
 }
 
 - (void)drawSeparatorLine
@@ -75,13 +93,24 @@
 
 }
 
+- (void)setDrawSeparator:(BOOL)drawSeparator
+{
+    _drawSeparator = drawSeparator;
+    self.seperatorView.hidden = !drawSeparator;
+}
+
+- (void)setCellSeparatorColor:(UIColor *)cellSeparatorColor
+{
+    _cellSeparatorColor = cellSeparatorColor;
+    self.seperatorView.backgroundColor = cellSeparatorColor;
+}
 - (void)drawRect:(CGRect)rect
 {
     [super drawRect:rect];
-    if (self.drawSeparator)
-    {
-        [self drawSeparatorLine];
-    }
+//    if (self.drawSeparator)
+//    {
+//        [self drawSeparatorLine];
+//    }
 }
 
 - (void)configureCell
