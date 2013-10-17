@@ -172,6 +172,40 @@ static BFCodePaintedUIElementsImageCache *defaultImageCache;
     return image;
 }
 
+//+ (UIImage *)navigationBarImageForBarMetrics:(UIBarMetrics)barMetrics color:(UIColor *)color alpha:(CGFloat)alpha
+//{
+//    CGFloat navigationBarHeight = 44.0f;
+//    
+//    if (barMetrics == UIBarMetricsLandscapePhone)
+//    {
+//        navigationBarHeight = 32.0f;
+//    }
+//    
+//    UIGraphicsBeginImageContextWithOptions(CGSizeMake(1, navigationBarHeight), NO, 0.0f);
+//    
+//    
+//    UIColor *mainColor = [SKFUserInterface mainColor];
+//    
+//    UIColor *bottomBorderColor = [SKFUserInterface darkerMainColor];
+//    
+//    CGFloat bottomBorderHeight = 1.0f;
+//    //// bar Drawing
+//    UIBezierPath* barPath = [UIBezierPath bezierPathWithRect: CGRectMake(0, 0, 320, navigationBarHeight - bottomBorderHeight)];
+//    [mainColor setFill];
+//    [barPath fill];
+//    
+//    //// bottom Border Drawing
+//    UIBezierPath* bottomBorderPath = [UIBezierPath bezierPathWithRect: CGRectMake(0, navigationBarHeight - bottomBorderHeight, 320, bottomBorderHeight)];
+//    [bottomBorderColor setFill];
+//    [bottomBorderPath fill];
+//    
+//    //create image
+//    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+//    UIGraphicsEndImageContext();
+//    
+//    return image;
+//}
+
 
 + (UIImage *)navigationBarImageForBarMetrics:(UIBarMetrics)barMetrics
 {
@@ -192,7 +226,7 @@ static BFCodePaintedUIElementsImageCache *defaultImageCache;
     CGFloat bottomBorderHeight = 1.0f;
     //// bar Drawing
     UIBezierPath* barPath = [UIBezierPath bezierPathWithRect: CGRectMake(0, 0, 320, navigationBarHeight - bottomBorderHeight)];
-    [mainColor setFill];
+    [[mainColor colorWithAlphaComponent:0.5f]setFill];
     [barPath fill];
     
     //// bottom Border Drawing

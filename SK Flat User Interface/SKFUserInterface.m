@@ -28,6 +28,7 @@
 
 #import "SKFUserInterface.h"
 #import "SKFCodePaintedUIElements.h"
+#import <MessageUI/MessageUI.h>
 
 @interface SKFUserInterface()
 @property (nonatomic, strong, readwrite) UIColor *mainColor;
@@ -85,12 +86,13 @@ static SKFUserInterface *defaultSKFUserInterface;
      }];
     
 
+
     // iOS 7 code
     UINavigationBar *navigationBar = [[UINavigationBar alloc] init];
     
     if ([navigationBar respondsToSelector:@selector(setBarTintColor:)])
     {
-        [[UINavigationBar appearance] setBarTintColor:[SKFUserInterface mainColor]];
+//        [[UINavigationBar appearance] setBarTintColor:[SKFUserInterface mainColor]];
     }
     else
     {
@@ -165,7 +167,7 @@ static SKFUserInterface *defaultSKFUserInterface;
     
     [[UIBarButtonItem appearance] setTitleTextAttributes:
      @{
-                                    UITextAttributeFont : [self defaultFontWithSize:17.0f],
+                                    UITextAttributeFont : [self defaultFontWithSize:14.0f],
 //                         UITextAttributeTextShadowColor : [UIColor clearColor],
 //                               UITextAttributeTextColor : [self mainColor]
      }
@@ -173,7 +175,7 @@ static SKFUserInterface *defaultSKFUserInterface;
     
     [[UIBarButtonItem appearance] setTitleTextAttributes:
      @{
-                                    UITextAttributeFont : [self defaultFontWithSize:17.0f],
+                                    UITextAttributeFont : [self defaultFontWithSize:14.0f],
 //                         UITextAttributeTextShadowColor : [UIColor clearColor],
 //                               UITextAttributeTextColor : [self mainColor]
      }
@@ -228,6 +230,9 @@ static SKFUserInterface *defaultSKFUserInterface;
                                                forState:UIControlStateNormal
                                              barMetrics:UIBarMetricsDefault];
     [[UISegmentedControl appearance] setBackgroundImage:[SKFCodePaintedUIElements segmentedControlSelectedBackgroundImage]
+                                               forState:UIControlStateHighlighted
+                                             barMetrics:UIBarMetricsDefault];
+    [[UISegmentedControl appearance] setBackgroundImage:[SKFCodePaintedUIElements segmentedControlSelectedBackgroundImage]
                                                forState:UIControlStateSelected
                                              barMetrics:UIBarMetricsDefault];
     [[UISegmentedControl appearance] setDividerImage:[[UIImage alloc] init]
@@ -250,6 +255,14 @@ static SKFUserInterface *defaultSKFUserInterface;
                                   UITextAttributeTextColor : [self almostWhiteColor]
      }
                                                    forState:UIControlStateSelected];
+    
+    [[UISegmentedControl appearance] setTitleTextAttributes:
+     @{
+       UITextAttributeFont : [self defaultFontWithSize:12.0f],
+       UITextAttributeTextShadowColor : [UIColor clearColor],
+       UITextAttributeTextColor : [self almostWhiteColor]
+       }
+                                                   forState:UIControlStateHighlighted];
 }
 
 
@@ -456,7 +469,7 @@ static SKFUserInterface *defaultSKFUserInterface;
 															borderColor:[SKFUserInterface mainColor]]
 				forState:UIControlStateHighlighted];
 		
-		[button setTitleColor:[SKFUserInterface darkerMainColor] forState:UIControlStateNormal];
+		[button setTitleColor:[SKFUserInterface almostWhiteColor] forState:UIControlStateNormal];
 		[button setTitleColor:[SKFUserInterface darkerMainColor] forState:UIControlStateHighlighted];
 
 		button.titleLabel.font = [SKFUserInterface defaultFontWithSize:14.0f];
@@ -473,7 +486,7 @@ static SKFUserInterface *defaultSKFUserInterface;
                                                                       borderColor:[SKFUserInterface almostWhiteColor]]
                           forState:UIControlStateHighlighted];
 		
-		[button setTitleColor:[SKFUserInterface mainColor] forState:UIControlStateNormal];
+		[button setTitleColor:[SKFUserInterface almostWhiteColor] forState:UIControlStateNormal];
 		[button setTitleColor:[SKFUserInterface mainColor] forState:UIControlStateHighlighted];
         
 		button.titleLabel.font = [SKFUserInterface defaultFontWithSize:14.0f];
