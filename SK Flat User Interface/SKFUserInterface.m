@@ -67,12 +67,12 @@ static SKFUserInterface *defaultSKFUserInterface;
 	[SKFUserInterface defaultSKFUserInterface].roundedCornerRadius = roundedCornerRadius;
 
     [self configureNavigationBar];
-	[self configureToolbar];
-
+    [self configureToolbar];
+//
     [self configureBarButtonItems];
-	[self configureSearchBar];
+//	[self configureSearchBar];
     [self configureSegmentedControl];
-
+//
     [self configureTabBar];
 }
 
@@ -547,6 +547,13 @@ static SKFUserInterface *defaultSKFUserInterface;
 
 + (void)styleSearchBar:(UISearchBar *)searchBar
 {
+
+    
+    searchBar.searchFieldBackgroundPositionAdjustment = UIOffsetMake(0, 0.5);
+    
+
+    searchBar.backgroundImage  = [SKFCodePaintedUIElements navigationBarImageForBarMetrics:UIBarMetricsDefault];
+     
 //    UIImage *image = [SKFCodePaintedUIElements searchBarImageWithColor:[SKFUserInterface almostWhiteColor] borderColor:[SKFUserInterface darkerMainColor]];
 //    image = [[[UIImage alloc] init] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
     
