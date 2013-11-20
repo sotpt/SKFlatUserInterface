@@ -45,6 +45,12 @@ typedef NS_ENUM(NSUInteger, SKFUserInterfaceButtonStyle)
 								   fontName:(NSString *)fontName
 						roundedCornerRadius:(CGFloat)roundedCornerRadius;
 
++ (void)configureUserInterfaceWithMainColor:(UIColor *)mainColor
+								   fontName:(NSString *)fontName
+                               boldFontName:(NSString *)boldFontName
+						roundedCornerRadius:(CGFloat)roundedCornerRadius;
+
+
 + (UIColor *)mainColor;
 + (UIColor *)darkerMainColor;
 + (UIColor *)lighterMainColor;
@@ -60,7 +66,11 @@ typedef NS_ENUM(NSUInteger, SKFUserInterfaceButtonStyle)
 + (UIColor *)color:(UIColor *)color withSaturation:(CGFloat)saturation;
 
 + (UIFont *)defaultFontWithSize:(CGFloat)size;
++ (UIFont *)boldFontWithSize:(CGFloat)size;
+
 + (UIFont *)defaultFontForLabel:(UILabel *)label;
++ (UIFont *)boldFontForLabel:(UILabel *)label;
+
 + (UIFont *)defaultFontForTextField:(UITextField *)textField;
 + (UIFont *)defaultFontForTextView:(UITextView *)textView;
 

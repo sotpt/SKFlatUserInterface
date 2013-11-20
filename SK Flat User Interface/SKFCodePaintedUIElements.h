@@ -55,4 +55,5 @@
 + (UIImage *)tabBarSelectionIndicatorImage;
 + (UIImage *)segmentedControlBackgroundImage;
 + (UIImage *)segmentedControlSelectedBackgroundImage;
++ (UIImage *)placeholderImageWithString:(NSString *)string width:(CGFloat)width;
 @end

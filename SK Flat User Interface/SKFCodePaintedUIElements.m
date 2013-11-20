@@ -38,7 +38,7 @@
 @property (nonatomic, strong) NSDateFormatter *dateFormatter;
 @property (nonatomic, strong) NSMutableDictionary *calendarImageCache;
 @property (nonatomic, strong) NSMutableDictionary *highlightedCalendarImageCache;
-
+@property (nonatomic, strong) NSMutableDictionary *placeHolderImageCache;
 @end
 
 @implementation BFCodePaintedUIElementsImageCache
@@ -71,6 +71,8 @@ static BFCodePaintedUIElementsImageCache *defaultImageCache;
         self.dateFormatter.dateFormat = shortDateFormatWithoutYear;
         self.calendarImageCache = [NSMutableDictionary dictionary];
         self.highlightedCalendarImageCache = [NSMutableDictionary dictionary];
+        self.placeHolderImageCache = [NSMutableDictionary dictionary];
+
 
     }
     return self;
@@ -630,7 +632,7 @@ static BFCodePaintedUIElementsImageCache *defaultImageCache;
     CGFloat yOffset = (contentRect.size.height - fontHeight) / 2.0 - 1.0f;
     
     
-    CGRect textRect = CGRectMake(0, yOffset, contentRect.size.width, fontHeight);
+    CGRect textRect = CGRectMake(1.0f, yOffset, contentRect.size.width, fontHeight);
     
     [text    drawInRect:textRect
                  withFont:font
@@ -690,7 +692,7 @@ static BFCodePaintedUIElementsImageCache *defaultImageCache;
 //    
         NSDateComponents *components = [[NSCalendar currentCalendar] components:NSYearCalendarUnit fromDate:date];
     //// Abstracted Attributes
-    NSString* textContent = [NSString stringWithFormat:@"%d", components.year];
+    NSString* textContent = [NSString stringWithFormat:@"%ld", (long)components.year];
     NSString* text2Content = [[BFCodePaintedUIElementsImageCache defaultImageCache].dateFormatter stringFromDate:date];
     
     
@@ -741,5 +743,48 @@ static BFCodePaintedUIElementsImageCache *defaultImageCache;
 + (UIImage *)calendarImageForDate:(NSDate *)date
 {
     return [SKFCodePaintedUIElements calendarImageForDate:date withColor:[SKFUserInterface darkerGrayColor] width:30.0f];
+}
+
++ (UIImage *)placeholderImageWithString:(NSString *)string width:(CGFloat)width
+{
+    UIImage *image = [BFCodePaintedUIElementsImageCache defaultImageCache].placeHolderImageCache[string];
+    if (image == nil)
+    {
+
+        UIGraphicsBeginImageContextWithOptions(CGSizeMake(width, width), NO, 0.0f);
+        
+        CGRect contentRect = CGRectMake(0, 0, width, width);
+        
+        [[SKFUserInterface grayColor] setFill];
+        CGContextFillRect(UIGraphicsGetCurrentContext(), contentRect);
+        
+        UIFont *font = [SKFUserInterface defaultFontWithSize:width / 2.5f];
+        
+        
+        CGFloat fontHeight = [string sizeWithFont:font].height;
+        CGFloat yOffset = (contentRect.size.height- fontHeight) / 2.0f;
+        
+        CGRect textRect = CGRectMake(0, yOffset, contentRect.size.width, fontHeight);
+//      [[UIColor greenColor] setFill];
+//      CGContextFillRect(UIGraphicsGetCurrentContext(), textRect);
+        
+        [[SKFUserInterface darkerGrayColor] setFill];
+        
+        [string    drawInRect:textRect
+                     withFont:font
+                lineBreakMode:NSLineBreakByClipping
+                    alignment:NSTextAlignmentCenter];
+        
+        //create image
+        image = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        if (string)
+        {
+            [BFCodePaintedUIElementsImageCache defaultImageCache].placeHolderImageCache[string] = image;
+        }
+        
+    }
+    
+    return image;
 }
 @end

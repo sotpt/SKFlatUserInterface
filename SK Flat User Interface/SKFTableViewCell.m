@@ -13,6 +13,8 @@
 #import "SKFRoundedCornersImageView.h"
 #import "SKFRoundedCornersLabel.h"
 
+#define SEPARATOR_INSET 0.0f
+
 @interface SKFTableViewCell()
 @property (nonatomic, strong, readwrite) UIView *seperatorView;
 @end
@@ -51,7 +53,7 @@
 
 - (void)setupSeparatorView
 {
-    self.seperatorView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.frame) - 1.0f, CGRectGetWidth(self.frame), 1.0f)];
+    self.seperatorView = [[UIView alloc] initWithFrame:CGRectMake(SEPARATOR_INSET, CGRectGetHeight(self.frame) - 1.0f, CGRectGetWidth(self.frame) - SEPARATOR_INSET, 1.0f)];
     self.seperatorView.backgroundColor = [UIColor greenColor];
     [self addSubview:self.seperatorView];
 }

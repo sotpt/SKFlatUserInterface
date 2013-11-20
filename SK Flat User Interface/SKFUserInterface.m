@@ -33,6 +33,7 @@
 @interface SKFUserInterface()
 @property (nonatomic, strong, readwrite) UIColor *mainColor;
 @property (nonatomic, copy, readwrite) NSString *fontName;
+@property (nonatomic, copy, readwrite) NSString *boldFontName;
 @property (nonatomic, assign, readwrite) CGFloat roundedCornerRadius;
 @end
 
@@ -59,11 +60,23 @@ static SKFUserInterface *defaultSKFUserInterface;
 #pragma mark - user interface configuration
 
 + (void)configureUserInterfaceWithMainColor:(UIColor *)mainColor
+                                   fontName:(NSString *)fontName
+                        roundedCornerRadius:(CGFloat)roundedCornerRadius
+{
+    [self configureUserInterfaceWithMainColor:mainColor
+                                     fontName:fontName
+                                 boldFontName:fontName
+                          roundedCornerRadius:roundedCornerRadius];
+}
+
++ (void)configureUserInterfaceWithMainColor:(UIColor *)mainColor
 								   fontName:(NSString *)fontName
+                               boldFontName:(NSString *)boldFontName
 						roundedCornerRadius:(CGFloat)roundedCornerRadius
 {
 	[SKFUserInterface defaultSKFUserInterface].mainColor = mainColor;
 	[SKFUserInterface defaultSKFUserInterface].fontName = fontName;
+    [SKFUserInterface defaultSKFUserInterface].boldFontName = boldFontName;
 	[SKFUserInterface defaultSKFUserInterface].roundedCornerRadius = roundedCornerRadius;
 
     [self configureNavigationBar];
@@ -76,11 +89,12 @@ static SKFUserInterface *defaultSKFUserInterface;
     [self configureTabBar];
 }
 
+
 + (void)configureNavigationBar
 {
     [[UINavigationBar appearance] setTitleTextAttributes:
      @{
-                                    UITextAttributeFont : [self defaultFontWithSize:17.0f],
+                                    UITextAttributeFont : [self boldFontWithSize:17.0f],
                          UITextAttributeTextShadowColor : [UIColor clearColor],
                                UITextAttributeTextColor : [self almostWhiteColor]
      }];
@@ -205,6 +219,9 @@ static SKFUserInterface *defaultSKFUserInterface;
 //    [[UITabBar appearance] setSelectionIndicatorImage:[[UIImage alloc] init]];
 //    [[UITabBar appearance] setSelectionIndicatorImage:[[UIImage alloc] init]];
 
+    [[UITabBar appearance] setBarTintColor:[UIColor whiteColor]];
+    [[UITabBar appearance] setTintColor:[SKFUserInterface mainColor]];
+
     [[UITabBar appearance] setBackgroundColor:[SKFUserInterface almostWhiteColor]];
     
     [[UITabBarItem appearance] setTitleTextAttributes:
@@ -226,19 +243,19 @@ static SKFUserInterface *defaultSKFUserInterface;
 
 + (void)configureSegmentedControl
 {
-    [[UISegmentedControl appearance] setBackgroundImage:[SKFCodePaintedUIElements segmentedControlBackgroundImage]
-                                               forState:UIControlStateNormal
-                                             barMetrics:UIBarMetricsDefault];
-    [[UISegmentedControl appearance] setBackgroundImage:[SKFCodePaintedUIElements segmentedControlSelectedBackgroundImage]
-                                               forState:UIControlStateHighlighted
-                                             barMetrics:UIBarMetricsDefault];
-    [[UISegmentedControl appearance] setBackgroundImage:[SKFCodePaintedUIElements segmentedControlSelectedBackgroundImage]
-                                               forState:UIControlStateSelected
-                                             barMetrics:UIBarMetricsDefault];
-    [[UISegmentedControl appearance] setDividerImage:[[UIImage alloc] init]
-                                 forLeftSegmentState:UIControlStateNormal
-                                   rightSegmentState:UIControlStateNormal
-                                          barMetrics:UIBarMetricsDefault];
+//    [[UISegmentedControl appearance] setBackgroundImage:[SKFCodePaintedUIElements segmentedControlBackgroundImage]
+//                                               forState:UIControlStateNormal
+//                                             barMetrics:UIBarMetricsDefault];
+//    [[UISegmentedControl appearance] setBackgroundImage:[SKFCodePaintedUIElements segmentedControlSelectedBackgroundImage]
+//                                               forState:UIControlStateHighlighted
+//                                             barMetrics:UIBarMetricsDefault];
+//    [[UISegmentedControl appearance] setBackgroundImage:[SKFCodePaintedUIElements segmentedControlSelectedBackgroundImage]
+//                                               forState:UIControlStateSelected
+//                                             barMetrics:UIBarMetricsDefault];
+//    [[UISegmentedControl appearance] setDividerImage:[[UIImage alloc] init]
+//                                 forLeftSegmentState:UIControlStateNormal
+//                                   rightSegmentState:UIControlStateNormal
+//                                          barMetrics:UIBarMetricsDefault];
     
     [[UISegmentedControl appearance] setTitleTextAttributes:
      @{
@@ -435,6 +452,16 @@ static SKFUserInterface *defaultSKFUserInterface;
 + (UIFont *)defaultFontForTextView:(UITextView *)textView
 {
     return [UIFont fontWithName:[SKFUserInterface defaultSKFUserInterface].fontName size:textView.font.pointSize];
+}
+
++ (UIFont *)boldFontWithSize:(CGFloat)size
+{
+    return [UIFont fontWithName:[SKFUserInterface defaultSKFUserInterface].boldFontName size:size];
+}
+
++ (UIFont *)boldFontForLabel:(UILabel *)label
+{
+    return [UIFont fontWithName:[SKFUserInterface defaultSKFUserInterface].boldFontName size:label.font.pointSize];
 }
 
 #pragma mark - rounded corners
